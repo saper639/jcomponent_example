@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Начало</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
+	<script src="https://cdn.componentator.com/spa.min@18.js"></script>
+	<!--<script src="jcta.min.js"></script>-->
+        <style>
+          .bold {font-weight: bold;}
+        </style>
+</head>	
+<body>
+  <div class='container' style='padding: 20px 0;'>
+     <p>Привет <span data-bind='obj.name__text:value__class:bold'><span></p>
+     <p>Значение: <span data-bind="obj.val__html:value__invisible:value > 100"></span></p>
+  </div>
+</body>
+<script>
+ var obj = {'name': '', 'val': 10} 
+ //изменение 1
+ setTimeout(()=>{
+    SET('obj.name', 'мир!');
+ }, 2000)
+ //изменение 2
+ setTimeout(()=>{
+    SET('obj.name', 'мирный мир!');
+    SET('obj.val',  50);
+ }, 4000)
+ //изменение 3
+ setTimeout(()=>{
+    obj.name = 'мирный миру мир!';
+    obj.val = 70;
+    UPDATE('obj');
+ }, 6000)
+ //изменение 4
+ setTimeout(()=>{
+    SET('obj.val',  120);
+ }, 8000)
+ //отслеживаем изменения переменной obj.name
+ WATCH('obj.name', function(path, value, type){
+    console.log('path:', path);	
+    console.log('value:', value);	
+    console.log('type:', type);	
+ })
+</script>
+</html>
