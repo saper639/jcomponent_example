@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Начало</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="ui.css" />
+	<script src="jquery-2.2.4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="jcta.min.js"></script>
+	<script src="ui.js"></script>
+        <style>
+          body {background-color: #eee;}
+          .mb10 {margin-bottom: 10px;}
+        </style>  
+</head>	
+<body>
+<div class='container'>
+  <div class='row'>
+     <div class='col-md-6'>
+	<div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
+	   <h4>Форма</h4>
+	   <div data---="textbox__form1.firstname__required:true;placeholder:Имя;icon2:pencil;error:Введите ваше имя" class='mb10'>Имя</div>
+	   <div data---="textbox__form1.lastname__required:true;placeholder:Фамилия;icon:pencil;error:Введите вашу фамилию" class='mb10'>Фамилия</div>
+	   <div data---="textbox__form1.secondname__placeholder:Отчество;" class='mb10'>Отчество</div>
+	   <div data---="textbox__form1.db__type:number;increment:true;required:true;" class='mb10'>Год рождения</div>
+	   <div data---="radiobutton__form1.sex__items:Муж|0,Жен|1;type:number;">Ваш пол</div>
+	   <div data-jc="textbox" data-jc-path="form1.email" data-jc-config="placeholder:Email;icon2:envelope-o;required:true;type:email;" class='mb10'>Email</div>
+	   <div data-jc="textbox" data-jc-path="form1.login" data-jc-config="placeholder:Логин;required:true;keypress:true;maxlength:20;validation:value.match(/^[0-9а-яА-Яa-zA-Z _\.(),\-]+$/)" class='mb10'>Логин</div>
+           <div data---="textbox__form1.password__type:password;required:true;maxlength:20;validation:value.match(/^[0-9a-zA-Z _\.(),\-]+$/)" class='mb10'>Пароль</div>	
+	   <div data---="textbox__form1.name__required:true;innerlabel:true;placeholder:Место работы;icon2:pencil;error:Введите место работы" class='mb10'>Место работы</div>
+	   <div data---="textarea__form1.description__placeholder:Описание деятельности;" class='mb10'>Описание деятельности</div>
+	   <div data---="checkbox__form1.agree_terms">Согласен с правилама</div>
+	   <div data-jc="error" data-jc-path="errors1"></div>
+           <div class='text-center'>
+              <button data-jc="click" data-jc-path="submit1" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Ждем..." class='btn btn-default btn-sm' >Сохранить 1</button> 
+              <button data-bind="form1.btn__click:submit2" class='btn btn-default btn-sm'>Сохранить 2</button>
+           </div>  
+        </div>        
+     </div>
+     <div class='col-md-6'>
+	<div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
+	   <h4>Форма в стеле Bootstrap</h4>
+	   <div data---="textbox__form2.firstname__required:true;placeholder:Имя;icon2:pencil;error:Введите ваше имя" class='mb10'>Имя</div>
+	   <div data---="textbox__form2.lastname__required:true;placeholder:Фамилия;icon:pencil;error:Введите вашу фамилию" class='mb10'>Фамилия</div>
+	   <div data---="textbox__form2.secondname__placeholder:Отчество;" class='mb10'>Отчество</div>
+	   <div data---="textbox__form2.db__type:number;increment:true;required:true;" class='mb10'>Год рождения</div>
+	   <div data---="radiobutton__form2.sex__items:Муж|0,Жен|1;type:number;">Ваш пол</div>
+	   <div data-jc="textbox" data-jc-path="form2.email" data-jc-config="placeholder:Email;icon2:envelope-o;required:true;type:email;" class='mb10'>Email</div>
+	   <div data-jc="textbox" data-jc-path="form2.login" data-jc-config="placeholder:Логин;required:true;keypress:true;maxlength:20;validation:value.match(/^[0-9а-яА-Яa-zA-Z _\.(),\-]+$/)" class='mb10'>Логин</div>
+           <div data---="textbox__form2.password__type:password;required:true;maxlength:20;validation:value.match(/^[0-9a-zA-Z _\.(),\-]+$/)" class='mb10'>Пароль</div>	
+	   <div data---="textbox__form2.name__required:true;innerlabel:true;placeholder:Место работы;icon2:pencil;error:Введите место работы" class='mb10'>Место работы</div>
+	   <div data---="textarea__form2.description__placeholder:Описание деятельности;" class='mb10'>Описание деятельности</div>
+	   <div data---="checkbox__form2.agree_terms">Согласен с правилама</div>
+	   <div data-jc="error" data-jc-path="errors1"></div>
+           <div class='text-center'>
+              <button data-jc="click" data-jc-path="submit1" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Ждем..." class='btn btn-default btn-sm' >Сохранить 1</button> 
+              <button data-bind="form2.btn__click:submit2" class='btn btn-default btn-sm'>Сохранить 2</button>
+           </div>  
+        </div>        
+     </div>
+  </div>
+</div>
+<script>
+  var form1 = {'db': 1950, 'sex': 0};
+  function submit1(e) {
+        SET('errors1', null);          
+	if (form1.db<1960) SET('errors1', 'Год роджения должен быть больше 1950');
+	if (!form1.agree_terms) SET('errors1', 'Вы должны согласиться с правилами');
+        if (form1.errors) return;
+	if (!VALIDATE('form1.*')) return; 
+        $(e.element).button('loading');       
+        setTimeout(()=>{
+	   console.log(form1);
+           alert(JSON.stringify(form1));  
+	}, 1000)
+  }
+  function submit2(e, event, value, path) {
+        SET('errors', null);          
+	if (form1.db<1960) SET('errors1', 'Год роджения должен быть больше 1950');
+	if (!form1.agree_terms) SET('errors1', 'Вы должны согласиться с правилами');
+        if (form1.errors) return;
+	if (!VALIDATE('form1.*')) return; 
+        $(e.element).button('loading');       
+        setTimeout(()=>{
+	   console.log(form1);
+           alert(JSON.stringify(form1));  
+	}, 1000)
+  }
+</script>
+</body>
+</head>
