@@ -25,6 +25,8 @@
 	   <div data---="textbox__form1.secondname__placeholder:Отчество;" class='mb10'>Отчество</div>
 	   <div data---="textbox__form1.db__type:number;increment:true;required:true;" class='mb10' style='width: 150px;'>Год рождения</div>
 	   <div data---="radiobutton__form1.sex__items:Муж|0,Жен|1;type:number;">Ваш пол</div>
+	   <div data---="dropdown__form1.color_id__items:,Красный|1,Зеленый|2,Желтый|3">Ваш любимый цвет</div>
+	   <div data---="input__form1.phone__mask:+7(###)###-####;maskregexp:null,null,null,\d,\d,\d,null,\d,\d,\d,null,\d,\d,\d,\d">Телефон</div>
 	   <div data-jc="textbox" data-jc-path="form1.email" data-jc-config="placeholder:Email;icon2:envelope-o;required:true;type:email;" class='mb10'>Email</div>
 	   <div data-jc="textbox" data-jc-path="form1.login" data-jc-config="placeholder:Логин;required:true;keypress:true;maxlength:20;validation:value.match(/^[0-9а-яА-Яa-zA-Z _\.(),\-]+$/)" class='mb10'>Логин</div>
            <div data---="textbox__form1.password__type:password;required:true;maxlength:20;validation:value.match(/^[0-9a-zA-Z _\.(),\-]+$/)" class='mb10'>Пароль</div>	
@@ -40,22 +42,35 @@
      </div>
      <div class='col-md-6'>
 	<div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
-	   <h4>Форма в стиле Bootstrap</h4>
+	   <h4>Форма в стиле Bootstrap</h4>	
 	   <div class="form-group">
-	       <div data---="textbox__form2.firstname__required:true;placeholder:Имя;error:Введите ваше имя;class:form-control;"></div>
+	       <div data---="textbox__form2.firstname__required:true;placeholder:Имя;error:Введите ваше имя;class:form-control;">Имя</div>
 	   </div>
 	   <div class="form-group">
-	       <div data---="textbox__form2.lastname__required:true;placeholder:Фамилия;error:Введите вашу фамилию;class:form-control;"></div>
+	       <div data---="textbox__form2.lastname__required:true;placeholder:Фамилия;error:Введите вашу фамилию;class:form-control;">Фамилия</div>
 	   </div>
 	   <div class="form-group">
 	       <div data---="textbox__form2.secondname__placeholder:Отчество;class:form-control;">Отчество</div>	   
            </div>
+	   <div class="form-group">
+		   <div data---="dropdown__form2.color_id__items:,Красный|1,Зеленый|2,Желтый|3;class:form-control;">Ваш любимый цвет</div>
+	   </div>
+	   <div class="form-group">
+	       <div class="input-group">
+	         <span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
+	         <div data---="textbox__form2.email__required:true;type:email;placeholder:Введите Ваш Email;class:form-control;"></div>
+               </div> 
+	   </div>
+	   <div class="form-group text-center">
+              <hr> 
+              <button data-jc="click" data-jc-path="submit3" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Ждем..." class='btn btn-default btn-sm' >Сохранить 3</button> 
+           </div>  
         </div>        
      </div>
   </div>
 </div>
 <script>
-  var form1 = {'db': 1950, 'sex': 0};
+  var form1 = {'db': 1950, 'sex': 0, 'phone':'+7(999)166-6666', };
   function submit1(e) {
         SET('errors1', null);          
 	if (form1.db<1960) SET('errors1', 'Год рождения должен быть больше 1950');

@@ -192,6 +192,11 @@ COMPONENT('textbox', function(self, config) {
 			self.html(builder.join(''));
 			input = self.find('input');
 		}
+                if (config.class) { 
+			self.find('.ui-textbox-input').rclass('ui-textbox-input');
+                        self.find('.ui-textbox').rclass('ui-textbox'); 
+			self.rclass('ui-textbox'); 
+                } 
 	};
 
 	self.configure = function(key, value, init) {
@@ -1266,6 +1271,9 @@ COMPONENT('dropdown', function(self, config) {
 		render && self.refresh();
 		config.disabled && self.reconfigure('disabled:true');
 		self.tclass('ui-dropdown-required', config.required === true);
+                if (config.class) { 
+			self.find('.ui-dropdown').rclass('ui-dropdown'); 
+                } 
 	};
 
 	self.make = function() {
@@ -1277,6 +1285,7 @@ COMPONENT('dropdown', function(self, config) {
 		config.if && (condition = FN(config.if));
 		config.items && self.reconfigure({ items: config.items });
 		config.datasource && self.reconfigure('datasource:' + config.datasource);
+	        if (config.class) self.find('select').attr('class', config.class);
 	};
 
 	self.state = function(type) {
