@@ -1,3 +1,7 @@
+.form-group { margin-bottom: 10px; }
+.form-control { box-shadow: none; }
+.form-control:focus { box-shadow: none; }
+
 input:-ms-input-placeholder, input:-webkit-input-placeholder, input:-moz-input-placeholder { color: gray; }
 input[type="text"]:disabled, input[type="password"]:disabled { background-color: #F0F0F0; cursor: not-allowed; color: gray; }
 input:invalid { box-shadow: none; }

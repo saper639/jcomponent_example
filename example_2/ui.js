@@ -139,6 +139,9 @@ COMPONENT('textbox', function(self, config) {
 		config.disabled && attrs.attr('disabled');
 		config.readonly && attrs.attr('readonly');
 		config.error && attrs.attr('error');
+	        config.class && attrs.attr('class', config.class);
+        	config.id && attrs.attr('id', config.id);
+
 		attrs.attr('data-jc-bind', '');
 
 		if (config.autofill) {
