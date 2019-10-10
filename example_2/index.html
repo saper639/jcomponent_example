@@ -15,11 +15,30 @@
         </style>  
 </head>	
 <body>
+<!-- Modal Win-->
+<div data-jc="form" data-jc-id="win" id="win" data-jc-path="win.view" data-jc-config="if:true;width:600;title:Заголовок;submit:modal_save;esc:true;autofocus:true" class="hidden">
+    <div style="padding:10px">  
+        <div class="form-group">        	    	        	    
+            <div data-jc="textbox" data-jc-path="win.form.title" data-jc-config="placeholder:Заголовок;class:form-control;required:true;maxlength:100">Заголовок</div>
+        </div>    
+       	<div class="form-group">        	    	        	    
+            <div data-jc="textarea" data-jc-path="win.form.body" data-jc-config="placeholder:Сообщение;class:form-control;required:true;maxlength:300">Сообщение</div>
+       	</div>
+       	<div class="form-group">        	    	        	    
+           <div style="width:200px;" data-jc="dropdown" data-jc-path="win.form.expire" data-jc-config="items:3 мин|180,10 мин|600,30 мин|1800,1 час|3600,5 часов|18000,10 часов|36000,1 день|8640;class:form-control;">Время жизни сообщения</div>
+       	</div>
+	<div class="ui-form-buttons">
+            <button name="cancel"><i class="fa fa-remove"></i> Отменить</button>
+            <button name="submit"><i class="fa fa-check" aria-hidden="true"></i> Сохранить</button>
+        </div>
+    </div>    
+</div>
+<!--/Modal win-->
 <div class='container'>
   <div class='row'>
      <div class='col-md-6'>
 	<div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
-	   <h4>Форма</h4>
+	   <h4>Форма<br><small>Используются компоненты: j-Textbox, j-Dropdown, j-Click, j-Error, j-Input</small></h4>
 	   <div data---="textbox__form1.firstname__required:true;placeholder:Имя;icon2:pencil;error:Введите ваше имя" class='mb10'>Имя</div>
 	   <div data---="textbox__form1.lastname__required:true;placeholder:Фамилия;icon:pencil;error:Введите вашу фамилию" class='mb10'>Фамилия</div>
 	   <div data---="textbox__form1.secondname__placeholder:Отчество;" class='mb10'>Отчество</div>
@@ -36,13 +55,13 @@
 	   <div data-jc="error" data-jc-path="errors1"></div>
            <div class='text-center'>
               <button data-jc="click" data-jc-path="submit1" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Ждем..." class='btn btn-default btn-sm' >Сохранить 1</button> 
-              <button data-bind="form1.btn__click:submit2" class='btn btn-default btn-sm'>Сохранить 2</button>
+              <button data-bind="form1.btn__click:submit2" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Ждем..." class='btn btn-default btn-sm'>Сохранить 2</button>
            </div>  
         </div>        
      </div>
      <div class='col-md-6'>
 	<div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
-	   <h4>Форма в стиле Bootstrap</h4>	
+	   <h4>Форма в стиле Bootstrap<br><small>Используются компоненты: j-Textbox, j-Dropdown</small></h4>	
 	   <div class="form-group">
 	       <div data---="textbox__form2.firstname__required:true;placeholder:Имя;error:Введите ваше имя;class:form-control;">Имя</div>
 	   </div>
@@ -63,9 +82,15 @@
 	   </div>
 	   <div class="form-group text-center">
               <hr> 
-              <button data-jc="click" data-jc-path="submit3" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Ждем..." class='btn btn-default btn-sm' >Сохранить 3</button> 
+              <button data-bind="form2.btn__click:submit3" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Ждем..." class='btn btn-default btn-sm'>Сохранить 3</button>
            </div>  
         </div>        
+	<div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
+	   <h4>Модальное окно<br><small>Используются компоненты: j-Textbox, j-Dropdown</small></h4>	
+	   <div class="form-group text-center">
+              <button data-bind="form3.btn__click:view_modal" class='btn btn-default btn-sm'>Открыть модальное окно</button>
+           </div>  
+	</div>
      </div>
   </div>
 </div>
@@ -94,6 +119,24 @@
 	   console.log(form1);
            alert(JSON.stringify(form1));  
 	}, 1000)
+  }
+  function submit3(e) {
+        SET('errors', null);          
+	if (!VALIDATE('form2.*')) return; 
+        $(e.element).button('loading');       
+        setTimeout(()=>{
+	   console.log(form2);
+           alert(JSON.stringify(form2));  
+	}, 1000)
+  }
+  function view_modal() {
+      RECONFIGURE('#win', { title: 'title' });  
+      SET('win.view', true); 
+  }
+  function modal_save() {
+     console.log(win.form); 
+     alert(JSON.stringify(win.form));  
+     SET('win.view', false); 
   }
 </script>
 </body>

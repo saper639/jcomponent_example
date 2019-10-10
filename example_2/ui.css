@@ -140,3 +140,28 @@ input:invalid { box-shadow: none; }
 
 .ui-error { margin: 0 0 15px; padding: 0; list-style-type: none; border: 2px solid #BE3A48; border-left-width: 0; border-right-width: 0; padding: 10px 0; color: #BE3A48; font-family: Arial; font-size: 14px }
 .ui-error .fa { width: 16px; }
+
+/*form*/
+.ui-form-container { width: 100%; position: fixed; left: 0; top: 0; bottom: 0; right: 0; background-color: rgba(96,90,90,0.8);/*rgba(230,233,237,0.8);*/ z-index: 5; overflow-y: scroll; transform-style: preserve-3d; overflow-scrolling: touch; }
+.ui-form-container-padding { padding: 0 30px; top: 10%; position: relative;}
+/*.ui-form { background-color: white; margin: 0 auto 30px; border-radius: 4px; box-shadow: 0 0 20px #D0D0D0; transform: translate(0, -500px); transition: all 0.2s; opacity: 0; }
+.ui-form-animate { transform: skewX(0deg); opacity: 1; }*/
+.ui-form { background-color: white; margin: 0 auto 30px; border-radius: 4px; box-shadow: 0 0 5px #D0D0D0; transform: scale(0.1); transition: all 0.2s; opacity: 0; }
+.ui-form-animate { transform: scale(1); opacity: 1; }
+.ui-form-animate-click { transform: skewX(-5deg); }
+.ui-form-padding { padding: 0 30px; }
+.ui-form-title { padding: 18px 20px; font-size: 16px; user-select: none; color: #AAB2BD; background-color: #F8F8F8; border-bottom: 1px solid #F0F0F0; }
+.ui-form-title .ui-form-button-close { float: right; cursor: pointer; font-size: 18px; margin: -2px 0 0 0; transition: all 0.2s; background: none; border: 0; outline: 0; height: auto; }
+.ui-form-title .ui-form-button-close:hover { transform: scale(1.2) rotate(-90deg); }
+.ui-form-title > span { font-weight: bold; }
+.ui-form-title > .fa { margin-right: 7px; }
+.ui-form-buttons { padding: 10px; border-top: 5px solid #F0F0F0; background-color: #F8F8F8; }
+.ui-form-buttons button { border: 2px solid #E0E0E0; background-color: white; border-radius: 4px; /*height: 45px; padding: 0 15px;*/padding: 8px 15px;  color: black; margin: 0; cursor: pointer; font-family: Arial; vertical-align: middle; outline: 0; font-size: 14px; text-decoration: none; transition: all 0.3s; }
+.ui-form-buttons button .fa { width: 16px; }
+.ui-form-buttons button:hover { border-color: silver; }
+.ui-form-buttons button:active { background-color: #D0D0D0; }
+.ui-form-buttons button:disabled { background-color: #F5F5F5 !important; border-color: #E0E0E0 !important; color: silver !important; cursor: not-allowed; box-shadow: none; }
+.ui-form-buttons button[name="submit"] { width: 220px; margin-right: 15px; font-weight: bold; }
+.ui-form-buttons button[name="cancel"] { color: gray; }
+.ui-form-buttons div { position: relative; display: inline-block; vertical-align: middle; }
+.ui-form-buttons label { float: right; margin: 12px 0 0 0; font-size: 11px; }
