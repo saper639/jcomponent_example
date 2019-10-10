@@ -1,19 +1,48 @@
 COMPONENT('imgview', function(self, config) {
-	var selectm, content = null;
+	var select, preview, content = null;
 	var render = '';
 	self.configure = function(key, value, init) {
+		if (init) return;
+		var redraw = false;
+		switch (key) {
+			case 'datasource':
+				self.datasource(value, self.bind);
+				break;
+		};
+		redraw && setTimeout2(self.id + '.redraw', 100);	
 	};	
-	self.redraw = function() {
-		console.log('yes2');
-		var html = '<select data-jc-bind="">{0}</select>'.format(render);
+	self.redraw = function() {		
+		var html = '<select data-jc-bind="" size="5" style="width:150px;">{0}</select><div class="preview"></div>'.format(render);		
 		self.html(html);
 		select = self.find('select');
-		render && self.refresh();
+		preview = self.find('.preview');
+		render && self.refresh();			
 	};	
-	self.make = function() {
-		console.log('yes');
+	self.setter = function(value) {
+		if (!value) return;
+		var img = self.preview.format(value);
+		preview.html(img);
+	};	
+	self.bind = function(path, arr) {		
+		if (!arr)
+			arr = EMPTYARRAY;		
+		var builder = [];
+		var value = self.get();
+		var propText = config.text || 'name';
+		var propValue = config.value || 'url';
+		config.empty !== undefined && builder.push('<option value="">{0}</option>'.format(config.empty));
+		for (var i = 0, length = arr.length; i < length; i++) {
+			var item = arr[i];			
+			builder.push(self.template({ value: item[propValue], selected: value == item[propValue], text: item[propText] }));
+		}		
+		render = builder.join('');
+		select.html(render);
+	};	
+	self.make = function() {		
 		self.template = Tangular.compile('<option value="{{value}}"{{if selected}} selected="selected"{{ fi }}>{{text}}</option>');
+		self.preview = '<img src="{0}" style="width:100px">';
 		content = self.html();
 		self.redraw();
+		config.datasource && self.reconfigure('datasource:' + config.datasource);		
 	};	
 })	
