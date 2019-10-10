@@ -3,13 +3,7 @@ COMPONENT('imgview', function(self, config) {
 	var render = '';
 	self.configure = function(key, value, init) {
 		if (init) return;
-		var redraw = false;
-		switch (key) {
-			case 'datasource':
-				self.datasource(value, self.bind);
-				break;
-		};
-		redraw && setTimeout2(self.id + '.redraw', 100);	
+		if (key=='datasource') self.datasource(value, self.bind);		
 	};	
 	self.redraw = function() {		
 		var html = '<select data-jc-bind="" size="5" style="width:150px;">{0}</select><div class="preview"></div>'.format(render);		
