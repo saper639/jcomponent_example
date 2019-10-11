@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Пример 5</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
+	<script src="jquery-2.2.4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="jcta.min.js"></script>
+        <style>                    
+          .mv20 {margin: 20px 0;}
+          .red {color: red;}
+          .green {color: green; font-weight:bold;}
+        </style>  
+</head>	
+<body>
+<template id='tExample1'>
+   <p>Использование <span class='{{color}}'>шаблонов</span>. Это очень {{how}}</p>	
+</template>
+<script type="text/html" id='tExample2'>
+ {{ foreach m in arr }}
+    {{ if m.id < 10 }}
+       <p>Запись №{{m.id}}, {{m.descr}}, {{m.dt|format('dd.MM.yyyy hh:mm:ss')}}, индекс {{ $index }}</p>
+    {{ fi }}
+{{ end }}
+</script>
+</template>
+  <div class='container'>
+      <div class='row'>
+     	<div class='col-md-8 center-block' style='float:none'>     		  
+           <h3>Использование шаблонизатора</h3>
+	   <div id='base'></div>
+           <hr>
+	   <div id='base2'></div>
+           <hr>
+	   <div id='base3'></div>
+        </div>
+      </div>
+  </div>
+<script>
+  var data1 = {color: 'red', how: 'просто!'};
+  var data2 = [
+      {id: 5,  descr: 'Запись 5',   dt: new Date()},
+      {id: 8,  descr: 'Запись 8',   dt: new Date()},
+      {id: 12, descr: 'Запись 12',  dt: new Date() },
+      {id: 2,  descr: 'Запись 2',   dt: new Date()},
+  ];
+  var ta1 = Tangular.compile($('#tExample1').html());
+  var ta2 = Tangular.compile($('#tExample2').html());
+  $('#base').html(ta1(data1));
+  $('#base2').append(Tangular.render($('#tExample1').html(), data1));
+  $('#base3').append(ta2({'arr': data2}));
+  setTimeout(()=>{
+      data1 = {color: 'green', how: 'супер просто!'};      
+      $('#base').html(ta1(data1));
+  }, 3000)
+</script>
+</body>
+</html>
