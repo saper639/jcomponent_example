@@ -13,10 +13,28 @@
   <div class='container' style='padding: 20px 0;'>
      <p>Привет <span data-bind='obj.name__text:value__class:bold'><span></p>
      <p>Значение: <span data-bind="obj.val__html:value__invisible:value > 100"></span></p>
+     <hr>	
+     <div data-bind="obj1__template:.product">
+       <script type="text/html">
+        <div class="product">
+            <div>Название: <b>{{ value.name }}</b></div>
+            <div>Стоимость: <i>{{ value.price | format(2) }}<i></div>        
+        </div>
+      </script>
+    </div>
+    <hr>
+   <div data-bind="arr__vbindarray">
+      <script type="text/html">
+        <div data-bind=".name__html b">Имя услуги: <b></b></div>
+        <p data-bind=".description__html"></p>
+        <span>----------</span>
+      </script>
+   </div>
   </div>
 </body>
 <script>
- var obj = {'name': '', 'val': 10} 
+ var obj = {'name': '', 'val': 10};
+ var arr = []; 
  //изменение 1
  setTimeout(()=>{
     SET('obj.name', 'мир!');
@@ -36,6 +54,18 @@
  setTimeout(()=>{
     SET('obj.val',  120);
  }, 8000)
+ //изменение 4
+ setTimeout(()=>{
+    SET('obj1',  {'name': 'Комбинезон', 'price': 181.1523});
+ }, 10000)
+ setTimeout(()=>{
+    arr = [{'name': 'Автомойка', 'description': 'Самый лучший сервис - автомойка'},
+           {'name': 'Автосервис', 'description': 'Самый лучший сервис - автосервис'},
+          ];
+   UPDATE('arr');
+ }, 11000)
+
+
  //отслеживаем изменения переменной obj.name
  WATCH('obj.name', function(path, value, type){
     console.log('path:', path);	
