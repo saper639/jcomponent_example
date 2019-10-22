@@ -7,10 +7,24 @@
 	<!--<script src="jcta.min.js"></script>-->
         <style>
           .bold {font-weight: bold;}
+          .fadeout {
+	     -webkit-transition: opacity 2s ease-in-out;
+             -moz-transition: opacity 2s ease-in-out;
+             -ms-transition: opacity 2s ease-in-out;
+             -o-transition: opacity 2s ease-in-out;
+	     opacity: 0;
+          }
+          .fadein {
+	     -webkit-transition: opacity 2s ease-in-out;
+             -moz-transition: opacity 2s ease-in-out;
+             -ms-transition: opacity 2s ease-in-out;
+             -o-transition: opacity 2s ease-in-out;
+	     opacity: 1;
+          }
         </style>
 </head>	
 <body>
-  <div class='container' style='padding: 20px 0;'>
+ <div class='container' style='padding: 20px 0;'>
      <p>Привет <span data-bind='obj.name__text:value__class:bold'><span></p>
      <p>Значение: <span data-bind="obj.val__html:value__invisible:value > 100"></span></p>
      <hr>	
@@ -30,11 +44,29 @@
         <span>----------</span>
       </script>
    </div>
-  </div>
+   <hr>
+   <div data-bind="obj3.val__.fadeout:value > 100__.fadein:value < 100">Анимация, скрытие элемента если значение будет больше 100 </div>
+   <hr>
+   <img data-bind="obj4.url__.fadeout:!value__.fadein:value__src:value" style='width:400px'>
+   <hr>
+   <div data-bind="obj5__vbindarray">
+      <script type="text/html">
+        <div data-bind=".name__html b">Название: <b></b></div>
+        <p>Цена: <span data-bind=".price__html__format:1"></span> руб.</p>
+	<button data-bind="price__click:link_buy">Купить</button>
+        <div>----------</div>
+      </script>
+   </div>
+   <p>Стоимость товаров: <span data-bind='obj5_basket.bal__text:value__format:2'></span> руб., Кол-во: <span data-bind='obj5_basket.cnt__text:value'></span></p>
+   <button data-bind="price__click:clear_buy">Очистить корзину</button>
+ </div>
 </body>
 <script>
  var obj = {'name': '', 'val': 10};
  var arr = []; 
+ var obj3 = {};
+ var obj5 = [{'name': 'Продукт 1', 'price': 2.75}, {'name': 'Продукт 2', 'price': 3.76}];
+ var obj5_basket = {'bal': 0, 'cnt': 0};
  //изменение 1
  setTimeout(()=>{
     SET('obj.name', 'мир!');
@@ -64,7 +96,28 @@
           ];
    UPDATE('arr');
  }, 11000)
+ setTimeout(()=>{
+    SET('obj3.val',  120);
+ }, 12000)
 
+ setTimeout(()=>{
+    SET('obj3.val',  50);
+ }, 16000)
+
+ setTimeout(()=>{
+    SET('obj4.url',  'https://bufferwall.com/download/B20190831T000000158.jpg');
+ }, 16000)
+
+ function link_buy(element, event, value, path) {
+    var index = $(element).data('index');
+    obj5_basket.bal += obj5[index]['price'];
+    obj5_basket.cnt += 1;
+    UPDATE('obj5_basket');	
+ }
+
+ function clear_buy(element, event, value, path) { 
+    SET('obj5_basket', {'bal': 0, 'cnt': 0});	
+ }
 
  //отслеживаем изменения переменной obj.name
  WATCH('obj.name', function(path, value, type){
