@@ -28,12 +28,10 @@
      <p>Привет <span data-bind='obj.name__text:value__class:bold'><span></p>
      <p>Значение: <span data-bind="obj.val__html:value__invisible:value > 100"></span></p>
      <hr>	
-     <div data-bind="obj1__template:.product">
+     <div data-bind="obj1__template">
        <script type="text/html">
-        <div class="product">
             <div>Название: <b>{{ value.name }}</b></div>
             <div>Стоимость: <i>{{ value.price | format(2) }}<i></div>        
-        </div>
       </script>
     </div>
     <hr>
@@ -70,43 +68,43 @@
  //изменение 1
  setTimeout(()=>{
     SET('obj.name', 'мир!');
- }, 2000)
+ }, 1000)
  //изменение 2
  setTimeout(()=>{
     SET('obj.name', 'мирный мир!');
     SET('obj.val',  50);
- }, 4000)
+ }, 2000)
  //изменение 3
  setTimeout(()=>{
     obj.name = 'мирный миру мир!';
     obj.val = 70;
     UPDATE('obj');
- }, 6000)
+ }, 3000)
  //изменение 4
  setTimeout(()=>{
     SET('obj.val',  120);
- }, 8000)
+ }, 4000)
  //изменение 4
  setTimeout(()=>{
     SET('obj1',  {'name': 'Комбинезон', 'price': 181.1523});
- }, 10000)
+ }, 6000)
  setTimeout(()=>{
     arr = [{'name': 'Автомойка', 'description': 'Самый лучший сервис - автомойка'},
            {'name': 'Автосервис', 'description': 'Самый лучший сервис - автосервис'},
           ];
    UPDATE('arr');
- }, 11000)
+ }, 8000)
  setTimeout(()=>{
     SET('obj3.val',  120);
- }, 12000)
+ }, 10000)
 
  setTimeout(()=>{
     SET('obj3.val',  50);
- }, 16000)
+ }, 14000)
 
  setTimeout(()=>{
     SET('obj4.url',  'https://bufferwall.com/download/B20190831T000000158.jpg');
- }, 16000)
+ }, 15000)
 
  function link_buy(element, event, value, path) {
     var index = $(element).data('index');
