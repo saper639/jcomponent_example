@@ -104,10 +104,11 @@
         SET('errors1', null);          
 	if (form1.db<1960) SET('errors1', 'Год рождения должен быть больше 1950');
 	if (!form1.agree_terms) SET('errors1', 'Вы должны согласиться с правилами');
-        if (form1.errors) return;
+        if (errors) return;
 	if (!VALIDATE('form1.*')) return; 
         $(e.element).button('loading');       
         setTimeout(()=>{
+	   $(e.element).button('reset');       
 	   console.log(form1);
            alert(JSON.stringify(form1));  
 	}, 1000)
