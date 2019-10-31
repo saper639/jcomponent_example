@@ -25,21 +25,16 @@
 </head>	
 <body>
  <div class='container' style='padding: 20px 0;'>
-     <h4>Пример 1</h4> 
      <p>Привет <span data-bind='obj.name__text:value__class:bold'><span></p>
-     <p>Значение: <span data-bind="obj.val__html:value__invisible:value > 100"></span></p>
+     <p>Значение: <span data-bind="obj.val__text:value__invisible:value > 100"></span></p>
      <hr>	
-     <h4>Пример 2</h4> 
-     <div data-bind="obj1__template:.product">
+     <div data-bind="obj1__template">
        <script type="text/html">
-        <div class="product">
             <div>Название: <b>{{ value.name }}</b></div>
             <div>Стоимость: <i>{{ value.price | format(2) }}<i></div>        
-        </div>
       </script>
     </div>
     <hr>
-     <h4>Пример 3</h4> 
    <div data-bind="arr__vbindarray">
       <script type="text/html">
         <div data-bind=".name__html b">Имя услуги: <b></b></div>
@@ -48,23 +43,20 @@
       </script>
    </div>
    <hr>
-   <h4>Пример 4</h4> 
    <div data-bind="obj3.val__.fadeout:value > 100__.fadein:value < 100">Анимация, скрытие элемента если значение будет больше 100 </div>
    <hr>
    <img data-bind="obj4.url__.fadeout:!value__.fadein:value__src:value" style='width:400px'>
    <hr>
-   <h4>Пример 5</h4> 
    <div data-bind="obj5__vbindarray">
       <script type="text/html">
         <div data-bind=".name__html b">Название: <b></b></div>
         <p>Цена: <span data-bind=".price__html__format:1"></span> руб.</p>
-	<button data-bind="price__click:link_buy">Купить</button>
+	<button data-bind="null__click:link_buy">Купить</button>
         <div>----------</div>
       </script>
    </div>
    <p>Стоимость товаров: <span data-bind='obj5_basket.bal__text:value__format:2'></span> руб., Кол-во: <span data-bind='obj5_basket.cnt__text:value'></span></p>
    <button data-bind="price__click:clear_buy">Очистить корзину</button>
-   <hr>   
  </div>
 </body>
 <script>
@@ -73,47 +65,46 @@
  var obj3 = {};
  var obj5 = [{'name': 'Продукт 1', 'price': 2.75}, {'name': 'Продукт 2', 'price': 3.76}];
  var obj5_basket = {'bal': 0, 'cnt': 0};
- var obj6 = {'val': 7};
  //изменение 1
  setTimeout(()=>{
     SET('obj.name', 'мир!');
- }, 2000)
+ }, 1000)
  //изменение 2
  setTimeout(()=>{
     SET('obj.name', 'мирный мир!');
     SET('obj.val',  50);
- }, 4000)
+ }, 2000)
  //изменение 3
  setTimeout(()=>{
     obj.name = 'мирный миру мир!';
     obj.val = 70;
     UPDATE('obj');
- }, 6000)
+ }, 3000)
  //изменение 4
  setTimeout(()=>{
     SET('obj.val',  120);
- }, 8000)
+ }, 4000)
  //изменение 4
  setTimeout(()=>{
     SET('obj1',  {'name': 'Комбинезон', 'price': 181.1523});
- }, 10000)
+ }, 6000)
  setTimeout(()=>{
     arr = [{'name': 'Автомойка', 'description': 'Самый лучший сервис - автомойка'},
            {'name': 'Автосервис', 'description': 'Самый лучший сервис - автосервис'},
           ];
    UPDATE('arr');
- }, 11000)
+ }, 8000)
  setTimeout(()=>{
     SET('obj3.val',  120);
- }, 12000)
+ }, 10000)
 
  setTimeout(()=>{
     SET('obj3.val',  50);
- }, 16000)
+ }, 14000)
 
  setTimeout(()=>{
     SET('obj4.url',  'https://bufferwall.com/download/B20190831T000000158.jpg');
- }, 16000)
+ }, 15000)
 
  function link_buy(element, event, value, path) {
     var index = $(element).data('index');
