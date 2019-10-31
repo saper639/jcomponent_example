@@ -25,9 +25,11 @@
 </head>	
 <body>
  <div class='container' style='padding: 20px 0;'>
+     <h4>Пример 1</h4> 
      <p>Привет <span data-bind='obj.name__text:value__class:bold'><span></p>
      <p>Значение: <span data-bind="obj.val__html:value__invisible:value > 100"></span></p>
      <hr>	
+     <h4>Пример 2</h4> 
      <div data-bind="obj1__template:.product">
        <script type="text/html">
         <div class="product">
@@ -37,6 +39,7 @@
       </script>
     </div>
     <hr>
+     <h4>Пример 3</h4> 
    <div data-bind="arr__vbindarray">
       <script type="text/html">
         <div data-bind=".name__html b">Имя услуги: <b></b></div>
@@ -45,10 +48,12 @@
       </script>
    </div>
    <hr>
+   <h4>Пример 4</h4> 
    <div data-bind="obj3.val__.fadeout:value > 100__.fadein:value < 100">Анимация, скрытие элемента если значение будет больше 100 </div>
    <hr>
    <img data-bind="obj4.url__.fadeout:!value__.fadein:value__src:value" style='width:400px'>
    <hr>
+   <h4>Пример 5</h4> 
    <div data-bind="obj5__vbindarray">
       <script type="text/html">
         <div data-bind=".name__html b">Название: <b></b></div>
@@ -59,6 +64,7 @@
    </div>
    <p>Стоимость товаров: <span data-bind='obj5_basket.bal__text:value__format:2'></span> руб., Кол-во: <span data-bind='obj5_basket.cnt__text:value'></span></p>
    <button data-bind="price__click:clear_buy">Очистить корзину</button>
+   <hr>   
  </div>
 </body>
 <script>
@@ -67,6 +73,7 @@
  var obj3 = {};
  var obj5 = [{'name': 'Продукт 1', 'price': 2.75}, {'name': 'Продукт 2', 'price': 3.76}];
  var obj5_basket = {'bal': 0, 'cnt': 0};
+ var obj6 = {'val': 7};
  //изменение 1
  setTimeout(()=>{
     SET('obj.name', 'мир!');

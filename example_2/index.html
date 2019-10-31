@@ -52,6 +52,7 @@
 	   <div data---="textbox__form1.name__required:true;innerlabel:true;placeholder:Место работы;icon2:pencil;error:Введите место работы" class='mb10'>Место работы</div>
 	   <div data---="textarea__form1.description__placeholder:Описание деятельности;" class='mb10'>Описание деятельности</div>
 	   <div data---="checkbox__form1.agree_terms">Согласен с правилама</div>
+	   <div data-bind="form1.agree_terms__visible:value !== true">Отметьте пункт согласен с правилами, иначе форма не будет сохранена</div>	
 	   <div data-jc="error" data-jc-path="errors1"></div>
            <div class='text-center'>
               <button data-jc="click" data-jc-path="submit1" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Ждем..." class='btn btn-default btn-sm' >Сохранить 1</button> 
