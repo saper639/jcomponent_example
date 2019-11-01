@@ -1,3 +1,47 @@
+COMPONENT('hello', function(self, config) {
+    self.make = function() {
+        self.element.text('Hello');
+    };
+});
+
+COMPONENT('timer', 'format:HH\\\:mm\\\:ss', function(self, config) {
+    self.make = function() {
+        setInterval(self.timer, 1000);
+    };
+
+    self.timer = function() {
+        var time = new Date().format(config.format); 
+        self.element.text(time);
+    };
+});
+
+COMPONENT('countdown', function(self, config) {
+    var count;
+    var timer;
+
+    self.timer = function() {
+        count--;
+        self.set(count, 3);
+        if (count)
+            self.element.text('countdown: ' + count);
+        else {
+            clearInterval(timer);
+            self.element.text('countdown: END');
+            config.end && EXEC(config.end); // vyvoláme funkciu ak je pri deklarovaní komponenty použitý config `end`
+        }
+    };
+
+    self.setter = function(value, path, type) {
+
+        if (!value || type === 3)
+            return;
+        count = value;
+        timer && clearInterval(timer);
+        timer = setInterval(self.timer, 1000);
+        self.timer();
+    };
+});
+
 COMPONENT('imgview', function(self, config) {
 	var select, preview, content = null;
 	var render = '';
