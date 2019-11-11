@@ -42,9 +42,10 @@
 	   <div data---="textbox__form1.firstname__required:true;placeholder:Имя;icon2:pencil;error:Введите ваше имя" class='mb10'>Имя</div>
 	   <div data---="textbox__form1.lastname__required:true;placeholder:Фамилия;icon:pencil;error:Введите вашу фамилию" class='mb10'>Фамилия</div>
 	   <div data---="textbox__form1.secondname__placeholder:Отчество;" class='mb10'>Отчество</div>
-	   <div data---="textbox__form1.db__type:number;increment:true;required:true;" class='mb10' style='width: 150px;'>Год рождения</div>
-	   <div data---="radiobutton__form1.sex__datesource:arr_colors;text:title;value:id;type:number;">Ваш пол</div>
-	   <div data---="dropdown__form1.color_id__items:,Красный|1,Зеленый|2,Желтый|3">Ваш любимый цвет</div>
+	   <div data---="textbox__form1.dy__type:number;increment:true;required:true;" class='mb10' style='width: 150px;'>Год рождения</div>
+	   <div data---="textbox__form1.dt__format:dd.MM.yyyy;" class='mb10' style='width: 150px;'>Дата рождения</div>
+	   <div data---="radiobutton__form1.sex__items:Жен|0,Муж|1;type:number;">Ваш пол</div>
+	   <div data---="dropdown__form1.color_id__datasource:arr_colors;value:id;text:title;type:number;">Ваш любимый цвет</div>
 	   <div data---="input__form1.phone__mask:+7(###)###-####;maskregexp:null,null,null,\d,\d,\d,null,\d,\d,\d,null,\d,\d,\d,\d">Телефон</div>
 	   <div data-jc="textbox" data-jc-path="form1.email" data-jc-config="placeholder:Email;icon2:envelope-o;required:true;type:email;" class='mb10'>Email</div>
 	   <div data-jc="textbox" data-jc-path="form1.login" data-jc-config="placeholder:Логин;required:true;keypress:true;maxlength:20;validation:value.match(/^[0-9а-яА-Яa-zA-Z _\.(),\-]+$/)" class='mb10'>Логин</div>
