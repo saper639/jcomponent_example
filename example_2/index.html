@@ -42,10 +42,9 @@
 	   <div data---="textbox__form1.firstname__required:true;placeholder:Имя;icon2:pencil;error:Введите ваше имя" class='mb10'>Имя</div>
 	   <div data---="textbox__form1.lastname__required:true;placeholder:Фамилия;icon:pencil;error:Введите вашу фамилию" class='mb10'>Фамилия</div>
 	   <div data---="textbox__form1.secondname__placeholder:Отчество;" class='mb10'>Отчество</div>
-	   <div data---="textbox__form1.dy__type:number;increment:true;required:true;" class='mb10' style='width: 150px;'>Год рождения</div>
-	   <div data---="textbox__form1.dt__format:dd.MM.yyyy;" class='mb10' style='width: 150px;'>Дата рождения</div>
-	   <div data---="radiobutton__form1.sex__items:Жен|0,Муж|1;type:number;">Ваш пол</div>
-	   <div data---="dropdown__form1.color_id__datasource:arr_colors;value:id;text:title;type:number;">Ваш любимый цвет</div>
+	   <div data---="textbox__form1.db__type:number;increment:true;required:true;" class='mb10' style='width: 150px;'>Год рождения</div>
+	   <div data---="radiobutton__form1.sex__items:Муж|0,Жен|1;type:number;">Ваш пол</div>
+	   <div data---="dropdown__form1.color_id__datasource:arr_colors;text:title;value:id;type:number;">Ваш любимый цвет</div>
 	   <div data---="input__form1.phone__mask:+7(###)###-####;maskregexp:null,null,null,\d,\d,\d,null,\d,\d,\d,null,\d,\d,\d,\d">Телефон</div>
 	   <div data-jc="textbox" data-jc-path="form1.email" data-jc-config="placeholder:Email;icon2:envelope-o;required:true;type:email;" class='mb10'>Email</div>
 	   <div data-jc="textbox" data-jc-path="form1.login" data-jc-config="placeholder:Логин;required:true;keypress:true;maxlength:20;validation:value.match(/^[0-9а-яА-Яa-zA-Z _\.(),\-]+$/)" class='mb10'>Логин</div>
@@ -57,7 +56,7 @@
 	   <div data-jc="error" data-jc-path="errors1"></div>
            <div class='text-center'>
               <button data-jc="click" data-jc-path="submit1" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Ждем..." class='btn btn-default btn-sm' >Сохранить 1</button> 
-              <button data-bind="form1.btn__click:submit2" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Ждем..." class='btn btn-default btn-sm'>Сохранить 2</button>
+              <button data-bind="form1.btn__click:submit1" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Ждем..." class='btn btn-default btn-sm'>Сохранить 2</button>
            </div>  
         </div>        
      </div>
@@ -105,27 +104,17 @@
         SET('errors1', null);          
 	if (form1.db<1960) SET('errors1', 'Год рождения должен быть больше 1950');
 	if (!form1.agree_terms) SET('errors1', 'Вы должны согласиться с правилами');
-        if (form1.errors) return;
+        if (errors) return;
 	if (!VALIDATE('form1.*')) return; 
         $(e.element).button('loading');       
         setTimeout(()=>{
+	   $(e.element).button('reset');       
 	   console.log(form1);
            alert(JSON.stringify(form1));  
 	}, 1000)
   }
-  function submit2(e, event, value, path) {
-        SET('errors', null);          
-	if (form1.db<1960) SET('errors1', 'Год рождения должен быть больше 1950');
-	if (!form1.agree_terms) SET('errors1', 'Вы должны согласиться с правилами');
-        if (form1.errors) return;
-	if (!VALIDATE('form1.*')) return; 
-        $(e.element).button('loading');       
-        setTimeout(()=>{
-	   console.log(form1);
-           alert(JSON.stringify(form1));  
-	}, 1000)
-  }
-  function submit3(e) {
+
+  function submit2(e) {
         SET('errors', null);          
 	if (!VALIDATE('form2.*')) return; 
         $(e.element).button('loading');       
@@ -134,6 +123,7 @@
            alert(JSON.stringify(form2));  
 	}, 1000)
   }
+
   function view_modal() {
       RECONFIGURE('#win', { title: 'title' });  
       SET('win.view', true); 

@@ -18,7 +18,24 @@
 	<div class='container'>
  		<div class='row'>
      		<div class='col-md-6 center-block' style='float:none;'>
-				<div class="panel panel-default" style='margin: 20px 0; padding:10px; min-height: 180px;'>
+				<div class="panel panel-default" style='margin: 20px 0; padding:10px; min-height: 120px;'>
+   				        <h4>Hello world</h4>	
+				        <div data---="hello"></div>
+				</div>
+				<div class="panel panel-default" style='margin: 20px 0; padding:10px; min-height: 120px;'>
+   				        <h4>Таймер</h4>	
+					<div data---="timer"></div>
+					<div data---="timer__null__format:mm\:ss"></div>
+					<div data---="timer__null__format:dd\.MM\.yyyy hh\:mm\:ss"></div>
+				</div>
+
+				<div class="panel panel-default" style='margin: 20px 0; padding:10px; min-height: 120px;'>
+   				        <h4>Countdown</h4>	
+					<div data---="countdown__mynumber__end:test"></div>
+				</div>
+
+				<div class="panel panel-default" style='margin: 20px 0; padding:10px; min-height: 120px;'>
+   				        <h4>Выбор изображения из списка</h4>	
 					<div data---="imgview__form.img__datasource:arr;text:name;value:url;" class='mb10'></div>
                                         <p>Изображение: <span data-bind="form.img__html:value"></span></p>
 				</div>
@@ -26,11 +43,16 @@
 		</div>
 	</div>	
 <script>
+   SET('mynumber', 20);
+   function test() {
+      alert('Таймер завершил отсчёт');
+   }
+
    var form = {'img': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK9DkWY2BgUcJMNZXyAz6Cpmiq-AhC098wtOnBL-3foioVeyaI'};
    var arr = [
    	 { name: 'ava1', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKMU4kxf7EmZPYd8SJgXuK1rd9YUw6ZZs5sGPuADjKiCxIixo4'},
    	 { name: 'ava2', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK9DkWY2BgUcJMNZXyAz6Cpmiq-AhC098wtOnBL-3foioVeyaI'},
-	 { name: 'ava3', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6yM6JujrHFOvFH9NvuV2lWnyXECBr1SWeF-I0tMdYmK942MXr'},
+	 { name: 'ava3', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6yM6JujrHFOvFH9NvuV2lWnyXECBr1SWeF-I0tMdYmK942MXr'},			       
    ]				
 </script>
 </body>
