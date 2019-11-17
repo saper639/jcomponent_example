@@ -16,7 +16,9 @@
 <body>
 	<div class='container'>
  		<div class='row'>
-     		<div class='col-md-8 center-block' style='float:none'>     		  
+     		<div class='col-md-8 center-block' style='float:none'>   
+                                <h2>jComponent - редактируемая таблица</h2>   		  
+                                <hr>
 				<table class='table table-bordered mv20'>
 					<thead> 
             			<tr> 
@@ -24,6 +26,7 @@
               				<th>id</th>
               				<th>Имя</th>
               				<th>Фамилия</th>              	        
+              				<th style='width:150px'>Цвет</th>              	        
               				<th></th>              	        
             			</tr>
           			</thead>    
@@ -34,6 +37,7 @@
                 				<td>{{id}}</td>
                 				<td class='edit' data-type='textbox' data-field='firstname'>{{firstname}}</td>
                 				<td class='edit' data-type='textbox' data-field='lastname'>{{lastname}}</td>
+                				<td class='edit' data-type='dropdown' data-field='color_id' data-source='arr_colors'>{{color_id|select(arr_colors)}}</td>
                 				<td><button type='button' class='btn btn-danger btn-flat btn-xs' data-bind="rem__click:remRow"  data-id='$index' title='Удалить запись'><i class='fa fa-fw fa-remove'></i></button></td>        
               				</tr>
           				</script>	
@@ -44,6 +48,7 @@
               				<th><div data---="textbox__form.id__required:true;type:number;placeholder:id;class:form-control input-sm;"></div></th>
               				<th><div data---="textbox__form.firstname__required:true;placeholder:Имя;class:form-control input-sm;"></div></th>
               				<th><div data---="textbox__form.lastname__required:true;placeholder:Фамилия;class:form-control input-sm;"></div></th>   
+              				<th><div data---="dropdown__form.color_id__required:true;datasource:arr_colors;text:name;value:id;type:number;class:form-control input-sm;"></div></th>   
               				<th><button type='button' class='btn btn-primary btn-flat btn-xs' data-bind="rem__click:addRow"  data-id='$index' title='Добавить запись'><i class='fa fa-fw fa-plus'></i></button></th>              	        
             			</tr>
           			</tfooter>    
@@ -52,21 +57,36 @@
 		</div>
 	</div>	
 <script>
+   Thelpers.select = function(value, arr) {
+       var res = arr.findItem('id', value);	
+       return (res) ? res.name : '';
+   };
+   var arr_colors = [
+   	 { id: 1, name: 'Красный'},   	 
+   	 { id: 2, name: 'Синий'},   	 
+   	 { id: 3, name: 'Зеленый'},   	 
+   ];	
    var datasource = [
-   	 { id: 125, firstname: 'Имя 1', lastname: 'Фамилия 1'},   	 
-   	 { id: 133, firstname: 'Имя 2', lastname: 'Фамилия 2'},   	 
-   	 { id: 143, firstname: 'Имя 3', lastname: 'Фамилия 3'},   	 
-   	 { id: 145, firstname: 'Имя 4', lastname: 'Фамилия 4'},   	 
+   	 { id: 125, firstname: 'Имя 1', lastname: 'Фамилия 1', color_id: 1},   	 
+   	 { id: 133, firstname: 'Имя 2', lastname: 'Фамилия 2', color_id: 2},   	 
+   	 { id: 143, firstname: 'Имя 3', lastname: 'Фамилия 3', color_id: 3},   	 
+   	 { id: 145, firstname: 'Имя 4', lastname: 'Фамилия 4', color_id: 2},   	 
    ]	
    //редактирование записи в ячейке таблицы	
    $('body').on('click', 'table td.edit', function(e) { 			
    	   if ($(e.target).closest('select, input, .btn-group, .btn, a').length) return;          
-   		var tr = $(this).closest('tr');  
-   		var ind = tr.data('index'); 
-   		var type = $(this).data('type');
-   		var field = $(this).data('field');
-   		$(this).html('<div data---="textbox__datasource[{0}].{1}__class:form-control input-sm;"></div>'.format(ind, field));
-   		COMPILE();          	   
+  	   var tr = $(this).closest('tr');  
+   	   var ind = tr.data('index'); 
+   	   var type = $(this).data('type');
+   	   var field = $(this).data('field');
+   	   var source = $(this).data('source');
+           if (type=='textbox') {
+	       $(this).html('<div data---="textbox__datasource[{0}].{1}__class:form-control input-sm;keypress:true;"></div>'.format(ind, field));
+           }
+           if (type=='dropdown') {
+	       $(this).html('<div data---="dropdown__datasource[{0}].{1}__class:form-control input-sm;required:true;datasource:{2};text:name;value:id;type:number;"></div>'.format(ind, field, source));
+           }
+   	   COMPILE();          	   
    })	
    //добавить запись
    function addRow(e) {

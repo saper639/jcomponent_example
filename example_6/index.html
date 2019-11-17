@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Пример 5</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
+	<script src="lib/jquery-2.2.4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="lib/jcta.min.js"></script>
+</head>	
+<body>
+<!--0e1cee0bb93c47768333236ffebcd645 API Key-->
+<div class='container'>
+     <div class='row'>
+     </div>
+</div>
+<script>
+  var apiKey = '0e1cee0bb93c47768333236ffebcd645';	
+  /*AJAX('GET https://newsapi.org/v2/sources', { category:'sports', language: 'it', apiKey:apiKey }, (err, res) => {
+     console.log(err);
+     console.log(res);
+  });*/
+
+  //search
+  /*AJAX('GET https://newsapi.org/v2/everything', { q: 'футбол', language: 'ru', apiKey:apiKey }, (err, res) => {
+     console.log(err);
+     console.log(res);
+  });*/
+    
+  //top
+  AJAX('GET https://newsapi.org/v2/top-headlines', { country: 'it', apiKey:apiKey, category:'sports' }, (err, res) => {
+     console.log(err);
+     console.log(res);
+  });
+  
+</script>
+</body>
+</html>
