@@ -3,15 +3,23 @@
 <head>
 	<title>Пример 5</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="lib/style.css" />
 	<script src="lib/jquery-2.2.4.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="lib/jcta.min.js"></script>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 </head>	
 <body>
-<!--0e1cee0bb93c47768333236ffebcd645 API Key-->
 <div class='container'>
-     <div class='row'>
-     </div>
+<header>
+   <nav class="navbar navbar-default navbar-static-top">
+     	<div class="navbar-header">	
+	    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+	        <i class="fa fa-bars"></i>
+	    </button>
+    	</div>
+   </nav>
+</header>
 </div>
 <script>
   var apiKey = '0e1cee0bb93c47768333236ffebcd645';	
@@ -27,10 +35,10 @@
   });*/
     
   //top
-  AJAX('GET https://newsapi.org/v2/top-headlines', { country: 'it', apiKey:apiKey, category:'sports' }, (err, res) => {
+/*  AJAX('GET https://newsapi.org/v2/top-headlines', { country: 'it', apiKey:apiKey, category:'sports' }, (err, res) => {
      console.log(err);
      console.log(res);
-  });
+  });*/
   
 </script>
 </body>
