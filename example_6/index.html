@@ -3,27 +3,53 @@
 <head>
 	<title>Пример 5</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" href="lib/style.css" />
 	<script src="lib/jquery-2.2.4.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<script src="lib/jcta.min.js"></script>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 </head>	
 <body>
-<div class='container'>
+<div class='container block-content'>
 <header>
    <nav class="navbar navbar-default navbar-static-top">
-     	<div class="navbar-header">	
-	    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-	        <i class="fa fa-bars"></i>
-	    </button>
-    	</div>
+	<div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">NAG</a>
+        </div>      
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+     	 <ul class="nav navbar-nav navbar-left">
+	   <li>
+	     <form class="navbar-form form-inline" role="form">
+	        <div class="form-group">
+                    <input type="email" class="form-control" id="Email" placeholder="Enter the search string" autofocus required />
+                </div>
+              	<button type="submit" class="btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i> Apply</button>
+            </form>
+           <li>
+	   <li><a href="#search" class="jrouting"><i class="fa fa-search" aria-hidden="true"></i> Search</a></li>
+	   <li><a href="#top" class="jrouting"><i class="fa fa-star" aria-hidden="true"></i> Top News</a></li>
+	   <li><a href="#history" class="jrouting"><i class="fa fa-history" aria-hidden="true"></i> History</a></li>
+         </ul>
+     	 <ul class="nav navbar-nav navbar-right">
+	   <li><a href="#setting" class="jrouting"><i class="fa fa-cogs" aria-hidden="true"></i> Setting</a></li>
+         </ul>
+      </div>
    </nav>
 </header>
+<div id="body" class='m10'>
 </div>
+</div>
+<script src="lib/jctajr.min.js"></script>
+<script src="lib/app.js"></script>
 <script>
-  var apiKey = '0e1cee0bb93c47768333236ffebcd645';	
-  /*AJAX('GET https://newsapi.org/v2/sources', { category:'sports', language: 'it', apiKey:apiKey }, (err, res) => {
+  /*var apiKey = '0e1cee0bb93c47768333236ffebcd645';	
+  AJAX('GET https://newsapi.org/v2/sources', { category:'sports', language: 'it', apiKey:apiKey }, (err, res) => {
      console.log(err);
      console.log(res);
   });*/

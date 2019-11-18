@@ -1,1 +1,10 @@
 body {background-color:#fbfbfb;}
+.block-content {
+ box-shadow: 0px 0px 10px 0px rgba(119, 119, 119, 0.36);
+ -moz-box-shadow: 0px 0px 10px 0px rgba(119, 119, 119, 0.36);
+ -webkit-box-shadow: 0px 0px 10px 0px rgba(119, 119, 119, 0.36);
+ background-color: rgb(251, 251, 251);
+ min-height: 800px;
+}
+
+m10 { margin: 10px!important; }
