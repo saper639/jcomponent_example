@@ -35,17 +35,12 @@ $(function() {
   NAV.route('#top', view_top);
   NAV.route('#history', view_history);
   NAV.route('#setting', view_setting);
-  NAV.autosave()
- /* console.log(NAV.url);
-  console.log(NAV.params);
-  console.log(NAV.query);
-  console.log(NAV.repositary);
-  console.log(READPARAMS());*/
   NAV.on('location', function(url) {          
+        console.log('location', url);  
         var new_page = url.slice(1);
         if (pages.includes(new_page)) {
             page = new_page;
-            //меню подсветим
+            //menu active
             active_url(url);
         };
   })
