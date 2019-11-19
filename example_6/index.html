@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Пример 5</title>
+	<title>Пример 6</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" href="lib/style.css" />
@@ -22,7 +22,7 @@
           </button>
           <a class="navbar-brand" href="#">NAG</a>
         </div>      
-        <div class="collapse navbar-collapse" id="navbar-collapse">
+        <div class="collapse navbar-collapse" id="navbar-collapse" data---="selected__common.page__selector:li;class:active;">
      	 <ul class="nav navbar-nav navbar-left">
 	   <li>
 	     <form class="navbar-form form-inline" role="form">
@@ -32,12 +32,12 @@
               	<button type="submit" class="btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i> Apply</button>
             </form>
            <li>
-	   <li><a href="#search" class="jrouting"><i class="fa fa-search" aria-hidden="true"></i> Search</a></li>
-	   <li><a href="#top" class="jrouting"><i class="fa fa-star" aria-hidden="true"></i> Top News</a></li>
-	   <li><a href="#history" class="jrouting"><i class="fa fa-history" aria-hidden="true"></i> History</a></li>
+	   <li data-if="search"><a href="#search" class="R"><i class="fa fa-search" aria-hidden="true"></i> Search</a></li>
+	   <li data-if="top"><a href="#top" class="R"><i class="fa fa-star" aria-hidden="true"></i> Top News</a></li>
+	   <li data-if="history"><a href="#history" class="R"><i class="fa fa-history" aria-hidden="true"></i> History</a></li>
          </ul>
      	 <ul class="nav navbar-nav navbar-right">
-	   <li><a href="#setting" class="jrouting"><i class="fa fa-cogs" aria-hidden="true"></i> Setting</a></li>
+	   <li data-if="setting"><a href="#setting" class="R"><i class="fa fa-cogs" aria-hidden="true"></i> Setting</a></li>
          </ul>
       </div>
    </nav>
@@ -46,6 +46,7 @@
 </div>
 </div>
 <script src="lib/jctajr.min.js"></script>
+<script src="lib/ui.js"></script>
 <script src="lib/app.js"></script>
 <script>
   /*var apiKey = '0e1cee0bb93c47768333236ffebcd645';	
