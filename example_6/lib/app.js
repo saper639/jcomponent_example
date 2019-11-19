@@ -1,5 +1,5 @@
-var common = {};
-var container = $('#body');
+  var common = {};
+  var container = $('#body');
   //меню для маршрутизации
   NAV.clientside('.R');	
   NAV.route('#search', ()=>{
@@ -16,4 +16,8 @@ var container = $('#body');
   });
   NAV.on('location', function(url) {          
         console.log('location', url);      
+  })
+  
+  WATCH('common.page', (path, value, type)=>{
+    console.log(value);	
   })
