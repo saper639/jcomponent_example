@@ -5,11 +5,13 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" href="lib/style.css" />
+	<link rel="stylesheet" href="lib/ui.css" />
 	<script src="lib/jquery-2.2.4.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 </head>	
 <body>
+<div data---="notify"></div>
 <div class='container block-content'>
 <header>
    <nav class="navbar navbar-default navbar-static-top">
@@ -43,8 +45,40 @@
    </nav>
 </header>
 <div id="body" class='m10'>
-   <div data---="page__common.page__if:search;url:search.html;"></div>
-</div>
+    <div data-jc="part__common.page__if:search" class='hidden'>
+       <h1>Search news</h1>
+    </div>
+    <div data-jc="part__common.page__if:top" class='hidden'>
+       <h1>Top news</h1>
+    </div>
+    <div data-jc="part__common.page__if:history" class='hidden'>
+       <h1>History</h1>
+    </div>
+    <div data-jc="part__common.page__if:setting" class='hidden'>
+       <h1>Settings</h1>
+	<div class='row'>
+    	  <div class='col-md-4 center-block' style='float:none;'>
+	    <div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
+   	      <div class="form-group">
+		   <div data---="dropdown__option.country__datasource:arr_countries;class:form-control;">Country</div>
+	      </div>
+   	      <div class="form-group">
+		   <div data---="dropdown__option.category__datasource:arr_categories;class:form-control;">Category</div>
+	      </div>
+   	      <div class="form-group">
+		   <div data---="dropdown__option.language__datasource:arr_language;class:form-control;">Language</div>
+	      </div>
+   	      <div class="form-group">
+		   <div data---="dropdown__option.sortBy__datasource:arr_sortby;class:form-control;">Sort By</div>
+	      </div>
+	      <div class="form-group text-center">
+                 <hr> 
+                 <button data-bind="null__click:save_option" class='btn btn-default btn-sm'>Save options</button>
+              </div>  
+            </div>
+          </div>
+        </div>
+    </div>
 </div>
 <script src="lib/jctajr.min.js"></script>
 <script src="lib/ui.js"></script>
