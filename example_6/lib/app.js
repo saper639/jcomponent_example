@@ -45,38 +45,38 @@
 
   var pageSearch = 1;  
   function lazyload_search(el) {
-     setTimeout(() => { 
-     AJAX('GET https://newsapi.org/v2/everything', { q: 'футбол', language: 'ru', apiKey:apiKey, pageSize: pageSize, page: pageSearch, sortBy: 'publishedAt' }, (res, err) => {
+     console.log('lazy search');   
+     AJAX('GET https://newsapi.org/v2/everything', { q: 'футбол', language: option.language, apiKey:apiKey, pageSize: pageSize, page: pageSearch, sortBy: option.sortBy }, (res, err) => {
         if (err) return;      
   	$(el).append(tCard(res));
         pageSearch += 1;
         var $container = $(el);
 	// Masonry + ImagesLoaded	
   	$container.imagesLoaded(function(){
+                console.log('yes');
 		$container.masonry({
 			itemSelector: '.box'
 		});
-	});        
-	el.after('<div class="lazyload clearfix"></div>');
+	});         
+	el.after('<div class="lazyload_search"></div>');
      });
-     }, 2000);	
   }
 
   var pageTop = 1;  
   function lazyload_top(el) {
-     setTimeout(() => { 
-     AJAX('GET https://newsapi.org/v2/top-headlines', { country: option.country, apiKey:apiKey, pageSize: pageSize, page: pageTop, sortBy: option.sortBy }, (res, err) => {
+     console.log('lazy top');   
+     /*AJAX('GET https://newsapi.org/v2/top-headlines', { country: option.country, apiKey:apiKey, pageSize: pageSize, page: pageTop, sortBy: option.sortBy }, (res, err) => {
         if (err) return;      
   	$(el).append(tCard(res));
         pageTop += 1;
         var $container = $(el);
-		// Masonry + ImagesLoaded
-	        $container.imagesLoaded(function(){
-			$container.masonry({
-				itemSelector: '.box',
-			});
+	// Masonry + ImagesLoaded
+	$container.imagesLoaded(function(){
+                console.log('yes2');
+		$container.masonry({
+			itemSelector: '.box',
 		});
-	el.after('<div class="lazyload clearfix"></div>');
-    });
-    }, 2000);
+	});
+	el.after('<div class="lazyload_top clearfix"></div>');
+    });*/
   }
