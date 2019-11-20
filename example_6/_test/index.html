@@ -13,6 +13,7 @@
 </head>	
 <body>
 <template id='tCard'>	 
+ <div class='row'>
    {{ foreach article in articles }}
       <div class='col-md-4 mb10 box'>
 	<div class='thumbnail card'>
@@ -33,13 +34,11 @@
         </div>
       </div>	
    {{ end }}
+ </div>
 </template>
 <div class='container block-content'>
    <div style="height:1000px;" data-jc="lazyload__null__selector:.lazyload;exec:lazyload">
-     <div class='row'>
-	<div class="boxes"></div>
-	<div class="lazyload"></div>
-     </div>
+	<div class="lazyload clearfix"></div>
    </div>
 </div>
 <script src="jctajr.min.js"></script>
@@ -62,7 +61,7 @@
 			horizontalOrder: true
 		});
 	});
-	el.after('<div class="lazyload"></div>');
+	el.after('<div class="lazyload clearfix"></div>');
    });
  }
 </script>

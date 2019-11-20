@@ -10,6 +10,9 @@
 
   var common = {};
   var option = CACHE('option')||{country: 'ru', category:'general', language: 'ru', sortBy: 'publishedAt'};
+  var apiKey = '0e1cee0bb93c47768333236ffebcd645';
+  var pageSize = 30;
+  var tCard = Tangular.compile($('#tCard').html());
 
   var container = $('#body');
   //меню для маршрутизации
@@ -35,6 +38,45 @@
   })
 
   function save_option() {
+     if (!VALIDATE('option.*')) return; 
      CACHE('option', option, '3 months'); 
      SETTER('notify', 'append', 'Settings successfully saved.');
+  }
+
+  var pageSearch = 1;  
+  function lazyload_search(el) {
+     setTimeout(() => { 
+     AJAX('GET https://newsapi.org/v2/everything', { q: 'футбол', language: 'ru', apiKey:apiKey, pageSize: pageSize, page: pageSearch, sortBy: 'publishedAt' }, (res, err) => {
+        if (err) return;      
+  	$(el).append(tCard(res));
+        pageSearch += 1;
+        var $container = $(el);
+	// Masonry + ImagesLoaded	
+  	$container.imagesLoaded(function(){
+		$container.masonry({
+			itemSelector: '.box'
+		});
+	});        
+	el.after('<div class="lazyload clearfix"></div>');
+     });
+     }, 2000);	
+  }
+
+  var pageTop = 1;  
+  function lazyload_top(el) {
+     setTimeout(() => { 
+     AJAX('GET https://newsapi.org/v2/top-headlines', { country: option.country, apiKey:apiKey, pageSize: pageSize, page: pageTop, sortBy: option.sortBy }, (res, err) => {
+        if (err) return;      
+  	$(el).append(tCard(res));
+        pageTop += 1;
+        var $container = $(el);
+		// Masonry + ImagesLoaded
+	        $container.imagesLoaded(function(){
+			$container.masonry({
+				itemSelector: '.box',
+			});
+		});
+	el.after('<div class="lazyload clearfix"></div>');
+    });
+    }, 2000);
   }

@@ -7,11 +7,36 @@
 	<link rel="stylesheet" href="lib/style.css" />
 	<link rel="stylesheet" href="lib/ui.css" />
 	<script src="lib/jquery-2.2.4.min.js"></script>
+	<script src="lib/imagesloaded.js"></script>
+	<script src="lib/masonry.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 </head>	
 <body>
+<template id='tCard'>	 
+   {{ foreach article in articles }}
+      <div class='col-md-4 mb10 box'>
+	<div class='thumbnail card'>
+	   <a href='{{article.url}}'>	
+             <div class='frame'>
+	       <img src="{{article.urlToImage}}" class='img-responsive'>
+               <div class='title'>  
+                 <div class='head'>
+                    {{article.source.name}}                                     
+                 </div>  
+               </div>
+             </div>   
+           </a>  
+           <div class='caption'>
+	      <h3>{{article.title}}<br><small>{{article.publishedAt|format('dd.MM.yyyy hh:mm')}}</small></h3>
+              <p>{{article.description}}</p>  
+           </div>
+        </div>
+      </div>	
+   {{ end }}
+</template>
 <div data---="notify"></div>
+<div data---="calendar__null__today:Set today;firstday:0"></div>
 <div class='container block-content'>
 <header>
    <nav class="navbar navbar-default navbar-static-top">
@@ -47,15 +72,29 @@
 <div id="body" class='m10'>
     <div data-jc="part__common.page__if:search" class='hidden'>
        <h1>Search news</h1>
+       <hr>
+       <div data-jc="lazyload__null__selector:.lazyload;exec:lazyload_search">
+     	  <div class='row'>	
+	     <div class="lazyload clearfix"></div>
+          </div>
+       </div>
     </div>
     <div data-jc="part__common.page__if:top" class='hidden'>
        <h1>Top news</h1>
+       <hr>
+       <div data-jc="lazyload__null__selector:.lazyload;exec:lazyload_top">
+     	  <div class='row'>	
+	     <div class="lazyload clearfix"></div>
+          </div>
+       </div>
     </div>
     <div data-jc="part__common.page__if:history" class='hidden'>
        <h1>History</h1>
+       <hr>
     </div>
     <div data-jc="part__common.page__if:setting" class='hidden'>
        <h1>Settings</h1>
+       <hr>
 	<div class='row'>
     	  <div class='col-md-4 center-block' style='float:none;'>
 	    <div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
@@ -71,6 +110,11 @@
    	      <div class="form-group">
 		   <div data---="dropdown__option.sortBy__datasource:arr_sortby;class:form-control;">Sort By</div>
 	      </div>
+              <div data---="checkbox__option.use_date" class='mb10'>Use date period?</div> 
+	      <div data-bind="option.use_date__hide:!value">
+	         <div data---="textbox__option.from__type:date;format:dd.MM.yyyy;required:true;" class='mb10'>From date</div>	 
+                 <div data---="textbox__option.to__type:date;format:dd.MM.yyyy;required:true;" class='mb10'>To date</div>
+              </div>
 	      <div class="form-group text-center">
                  <hr> 
                  <button data-bind="null__click:save_option" class='btn btn-default btn-sm'>Save options</button>
@@ -83,25 +127,5 @@
 <script src="lib/jctajr.min.js"></script>
 <script src="lib/ui.js"></script>
 <script src="lib/app.js"></script>
-<script>
-  /*var apiKey = '0e1cee0bb93c47768333236ffebcd645';	
-  AJAX('GET https://newsapi.org/v2/sources', { category:'sports', language: 'it', apiKey:apiKey }, (err, res) => {
-     console.log(err);
-     console.log(res);
-  });*/
-
-  //search
-  /*AJAX('GET https://newsapi.org/v2/everything', { q: 'футбол', language: 'ru', apiKey:apiKey }, (err, res) => {
-     console.log(err);
-     console.log(res);
-  });*/
-    
-  //top
-/*  AJAX('GET https://newsapi.org/v2/top-headlines', { country: 'it', apiKey:apiKey, category:'sports' }, (err, res) => {
-     console.log(err);
-     console.log(res);
-  });*/
-  
-</script>
 </body>
 </html>
