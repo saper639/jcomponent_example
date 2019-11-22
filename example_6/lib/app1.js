@@ -19,19 +19,23 @@
   NAV.clientside('.R');	
   NAV.route('#search', ()=>{
     SET('common.page', 'search');
-    var lazy = $('.search_content').FIND('lazyload');
+    var lazy = $('.search_content').is('.row');
+    if (!lazy) {  
+	lazyload_search(null, $('.search_content'));
+    } 
+    /*var lazy = $('.search_content').FIND('lazycontent');
     if (!lazy) {
-      $('.search_content').append('<div data-jc="lazyload__null__selector:.lazyload_search;exec:lazyload_search;offset:10;"><div class="lazyload_search"></div></div>');
+      $('.search_content').append('<div data-jc="lazycontent__null__init:lazyload_search;height:1000px;"></div>');
       COMPILE();	
-    }
+    }*/
   });
   NAV.route('#top', ()=>{
     SET('common.page', 'top');
-    $('.top_content').html('');      
+    /*$('.top_content').html('');      
     common.pTop = 1;
     console.log(common);
-    $('.top_content').append('<div data-jc="lazyload__null__selector:.lazyload_top;exec:lazyload_top;offset:10;"><div class="lazyload_top"></div></div>');
-    COMPILE();	
+    $('.top_content').append('<div data-jc="lazycontent__null__init:lazyload_top;height:1000px;"></div>');
+    COMPILE();	                                                                                          */
   });
   NAV.route('#history', ()=>{
     SET('common.page', 'history');
@@ -52,38 +56,58 @@
      CACHE('option', option, '3 months'); 
      SETTER('notify', 'append', 'Settings successfully saved.');
   }
-
-  function lazyload_search(el) {
-     console.log('lazy search'); 
+  function lazyload_search() {
+     console.log('lazy search');
      AJAXCACHE('GET https://newsapi.org/v2/everything', { q: option.query||'футбол', language: option.language, apiKey:apiKey, pageSize: pageSize, page: common.pSearch, sortBy: option.sortBy }, (res, err) => {
-        if (!res) return;      
-  	$(el).append(tCard(res));
+        if (!res) return;   
+        common.pSearch += 1;   	
+        var $container = $('.search_content');
+        var lazy = ($container.is('.row')) ? true : false;
+ 	$container.append('<div class="row"></div>');
+        $container = $('.search_content .row');
+	$container.append(tCard(res));
+	$container.imagesLoaded(function(){
+	   $container.masonry({
+		itemSelector: '.box'
+	   });
+	});         
+        if (!lazy) {  
+           $container.after('<div data-jc="lazycontent__null__init:lazyload_search;redraw:lazyload_search;"></div>');
+           COMPILE();        
+        }
+     }, '1 hours');
+  }
+  /*function lazyload_search(comp) {
+     console.log('lazy search');
+     AJAXCACHE('GET https://newsapi.org/v2/everything', { q: option.query||'футбол', language: option.language, apiKey:apiKey, pageSize: pageSize, page: common.pSearch, sortBy: option.sortBy }, (res, err) => {
+        if (!res) return;      	
+        var $container = $(comp.element);
+  	$container.append(tCard(res));
         common.pSearch += 1;
-        var $container = $(el);
-        console.log('lazy search'); 
 	// Masonry + ImagesLoaded	
   	$container.imagesLoaded(function(){
 		$container.masonry({
 			itemSelector: '.box'
 		});
 	});         
-	el.after('<div class="lazyload_search"></div>');
+	//$container.after('<div data-jc="lazycontent__null__init:lazyload_search"></div>');
+        //COMPILE();
      }, '1 hours');
-  }
-
-  function lazyload_top(el) {
+  }*/
+  function lazyload_top(comp) {
+     console.log('lazy top');
      AJAXCACHE('GET https://newsapi.org/v2/top-headlines', { country: option.country, category: option.category, apiKey:apiKey, pageSize: pageSize, page: common.pTop, sortBy: option.sortBy }, (res, err) => {        
         if (!res) return;      
-  	$(el).append(tCard(res));
+        var $container = $(comp.element);
+  	$container.append(tCard(res));
         common.pTop += 1;
-        var $container = $(el);
 	// Masonry + ImagesLoaded
 	$container.imagesLoaded(function(){
 		$container.masonry({
 			itemSelector: '.box',
 		});
 	});
-	el.after('<div class="lazyload_top"></div>');
+	//el.after('<div class="lazyload_top"></div>');
     }, '1 hours');
   }
 

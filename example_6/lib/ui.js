@@ -1142,7 +1142,7 @@ COMPONENT('lazyload', 'offset:50', function(self, config) {
 	};
 
 	self.refresh = function() {
-		!self.release() && setTimeout2(self.id, self.prepare, 200);
+		!self.release() && setTimeout2(self.id, self.prepare, 500);
 	};
 
 	self.released = self.refresh;
