@@ -7,19 +7,23 @@
 	<link rel="stylesheet" href="lib/style.css" />
 	<link rel="stylesheet" href="lib/ui.css" />
 	<script src="lib/jquery-2.2.4.min.js"></script>
-	<script src="lib/imagesloaded.js"></script>
 	<script src="lib/masonry.min.js"></script>
+	<script src="lib/imagesloaded.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 </head>	
 <body>
-<template id='tCard'>	 
+<template id="tCard">
    {{ foreach article in articles }}
       <div class='col-md-4 mb10 box'>
 	<div class='thumbnail card'>
 	   <a href='{{article.url}}'>	
              <div class='frame'>
-	       <img src="{{article.urlToImage}}" class='img-responsive'>
+              {{ if article.urlToImage }}
+	            <img src="{{article.urlToImage}}" class='img-responsive'>
+              {{ else }}
+	            <img src="lib/no_image.png" class='img-responsive'>
+              {{fi}}	  
                <div class='title'>  
                  <div class='head'>
                     {{article.source.name}}                                     
@@ -54,9 +58,9 @@
 	   <li>
 	     <form class="navbar-form form-inline" role="form">
 	        <div class="form-group">
-                    <input type="email" class="form-control" id="Email" placeholder="Enter the search string" autofocus required />
+  	            <div data---="textbox__option.query__placeholder:Enter the search string;class:form-control;"></div>	   
                 </div>
-              	<button type="submit" class="btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i> Apply</button>
+                <button type='button' data-bind="null__click:apply_filter" class='btn btn-default'><i class="fa fa-filter" aria-hidden="true"></i> Apply</button>
             </form>
            <li>
 	   <li data-if="search"><a href="#search" class="R"><i class="fa fa-search" aria-hidden="true"></i> Search</a></li>

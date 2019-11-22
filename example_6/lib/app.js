@@ -19,9 +19,19 @@
   NAV.clientside('.R');	
   NAV.route('#search', ()=>{
     SET('common.page', 'search');
+    var lazy = $('.search_content').FIND('lazyload');
+    if (!lazy) {
+      $('.search_content').append('<div data-jc="lazyload__null__selector:.lazyload;exec:lazyload_search"><div class="lazyload"></div></div>');
+     COMPILE();	
+    }
   });
   NAV.route('#top', ()=>{
     SET('common.page', 'top');
+    var lazy = $('.top_content').FIND('lazyload');
+    if (!lazy) {
+      $('.top_content').append('<div data-jc="lazyload__null__selector:.lazyload;exec:lazyload_top"><div class="lazyload"></div></div>');
+     COMPILE();	
+    }
   });
   NAV.route('#history', ()=>{
     SET('common.page', 'history');
@@ -45,38 +55,43 @@
 
   var pageSearch = 1;  
   function lazyload_search(el) {
-     console.log('lazy search');   
-     AJAX('GET https://newsapi.org/v2/everything', { q: 'футбол', language: option.language, apiKey:apiKey, pageSize: pageSize, page: pageSearch, sortBy: option.sortBy }, (res, err) => {
+     AJAX('GET https://newsapi.org/v2/everything', { q: option.query||'футбол', language: option.language, apiKey:apiKey, pageSize: pageSize, page: pageSearch, sortBy: option.sortBy }, (res, err) => {
         if (err) return;      
   	$(el).append(tCard(res));
         pageSearch += 1;
         var $container = $(el);
+        console.log('lazy search'); 
 	// Masonry + ImagesLoaded	
   	$container.imagesLoaded(function(){
-                console.log('yes');
 		$container.masonry({
 			itemSelector: '.box'
 		});
 	});         
-	el.after('<div class="lazyload_search"></div>');
+	el.after('<div class="lazyload"></div>');
      });
   }
 
   var pageTop = 1;  
   function lazyload_top(el) {
-     console.log('lazy top');   
-     /*AJAX('GET https://newsapi.org/v2/top-headlines', { country: option.country, apiKey:apiKey, pageSize: pageSize, page: pageTop, sortBy: option.sortBy }, (res, err) => {
+     AJAX('GET https://newsapi.org/v2/top-headlines', { country: option.country, category: option.category, apiKey:apiKey, pageSize: pageSize, page: pageTop, sortBy: option.sortBy }, (res, err) => {        
         if (err) return;      
   	$(el).append(tCard(res));
         pageTop += 1;
         var $container = $(el);
 	// Masonry + ImagesLoaded
 	$container.imagesLoaded(function(){
-                console.log('yes2');
 		$container.masonry({
 			itemSelector: '.box',
 		});
 	});
-	el.after('<div class="lazyload_top clearfix"></div>');
-    });*/
+	el.after('<div class="lazyload"></div>');
+    });
+  }
+
+  function apply_filter() {
+     if (common.page == 'search') {
+	$('.search_content').html('');
+        REDIRECT('#search');
+     } 
+     return false;
   }
