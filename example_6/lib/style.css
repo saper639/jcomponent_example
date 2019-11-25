@@ -12,7 +12,7 @@ mb10 { margin-bottom: 10px!important; }
 .search_content .item, .top_content .item { 
     opacity: 0; 
     transition: opacity 0.3s, visibility 0.3s;}
-.search_content .item.masonry-brick { 
+.search_content .item.masonry-brick, .top_content .item.masonry-brick { 
     visibility: visible;
     opacity: 1;
     transition: opacity 0.3s, visibility 0.3s;

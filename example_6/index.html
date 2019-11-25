@@ -13,9 +13,12 @@
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 </head>	
 <body>
+<template id='tEnd'>	 
+	<div class="col-md-12 text-center"><hr><p class="end">End of content</p></div>
+</template>
 <template id="tCard">
    {{ foreach article in articles }}
-      <div class='col-md-4 mb10 box'>
+      <div class='col-md-4 mb10 item'>
 	<div class='thumbnail card'>
 	   <a href='{{article.url}}'>	
              <div class='frame'>

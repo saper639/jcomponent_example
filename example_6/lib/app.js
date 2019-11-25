@@ -11,8 +11,9 @@
   var common = { 'pTop': 1, 'pSearch': 1};
   var option = CACHE('option')||{country: 'ru', category:'general', language: 'ru', sortBy: 'publishedAt'};
   var apiKey = '0e1cee0bb93c47768333236ffebcd645';
-  var pageSize = 10;
+  var pageSize = 20;
   var tCard = Tangular.compile($('#tCard').html());
+  var tEnd = Tangular.compile($('#tEnd').html()); 	
 
   var container = $('#body');
   //меню для маршрутизации
@@ -21,17 +22,18 @@
     SET('common.page', 'search');
     var lazy = $('.search_content').FIND('lazyload');
     if (!lazy) {
-      $('.search_content').append('<div data-jc="lazyload__null__selector:.lazyload_search;exec:lazyload_search;offset:10;"><div class="lazyload_search"></div></div>');
+      $('.search_content').append('<div data-jc="lazyload__null__selector:.lazyload;exec:lazyload_search;"><div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div></div>');
       COMPILE();	
     }
   });
   NAV.route('#top', ()=>{
     SET('common.page', 'top');
     $('.top_content').html('');      
-    common.pTop = 1;
-    console.log(common);
-    $('.top_content').append('<div data-jc="lazyload__null__selector:.lazyload_top;exec:lazyload_top;offset:10;"><div class="lazyload_top"></div></div>');
-    COMPILE();	
+    SET('common.pTop', 1);
+    setTimeout(()=>{
+	$('.top_content').append('<div data-jc="lazyload__null__selector:.lazyload;exec:lazyload_top;"><div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div></div>');
+	COMPILE();	
+    }, 1000)    
   });
   NAV.route('#history', ()=>{
     SET('common.page', 'history');
@@ -55,36 +57,43 @@
 
   function lazyload_search(el) {
      console.log('lazy search'); 
-     AJAXCACHE('GET https://newsapi.org/v2/everything', { q: option.query||'футбол', language: option.language, apiKey:apiKey, pageSize: pageSize, page: common.pSearch, sortBy: option.sortBy }, (res, err) => {
-        if (!res) return;      
-  	$(el).append(tCard(res));
+     AJAXCACHE('GET https://newsapi.org/v2/everything', { q: option.query||'футбол', language: option.language, apiKey:apiKey, pageSize: pageSize, page: common.pSearch, sortBy: option.sortBy }, (res, isFromCache) => {
+ 	if (!res.status || res.status=='error') {
+	     $(el).html(tEnd());
+	     return;	
+	};
+
+  	$(el).html(tCard(res));
         common.pSearch += 1;
         var $container = $(el);
-        console.log('lazy search'); 
 	// Masonry + ImagesLoaded	
   	$container.imagesLoaded(function(){
-		$container.masonry({
-			itemSelector: '.box'
-		});
+	      $container.masonry({
+	    	   itemSelector: '.item'
+	      });
 	});         
-	el.after('<div class="lazyload_search"></div>');
-     }, '1 hours');
+	el.after('<div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div>');
+     }, '5 hours');
   }
 
   function lazyload_top(el) {
+     console.log('lazy top', common); 
      AJAXCACHE('GET https://newsapi.org/v2/top-headlines', { country: option.country, category: option.category, apiKey:apiKey, pageSize: pageSize, page: common.pTop, sortBy: option.sortBy }, (res, err) => {        
-        if (!res) return;      
-  	$(el).append(tCard(res));
+ 	if (!res.status || res.status=='error') {
+	     $(el).html(tEnd());
+	     return;	
+	};
+  	$(el).html(tCard(res));
         common.pTop += 1;
         var $container = $(el);
 	// Masonry + ImagesLoaded
 	$container.imagesLoaded(function(){
-		$container.masonry({
-			itemSelector: '.box',
-		});
+	      $container.masonry({
+		itemSelector: '.item',
+	      });
 	});
-	el.after('<div class="lazyload_top"></div>');
-    }, '1 hours');
+	el.after('<div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div>');
+    }, '5 hours');
   }
 
   function apply_filter() {
