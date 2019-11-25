@@ -42,6 +42,11 @@
    {{ end }}
 </template>
 <div class='container block-content'>
+ <hr>
+ <div class='text-center'>
+    <button type='button' data-bind="null__click:reload" class='btn btn-default'><i class="fa fa-refresh" aria-hidden="true"></i> Reload</button>
+ </div>
+ <hr>
  <div class='row'>
    <div data-jc="lazyload__null__selector:.lazyload;exec:lazyload;offset:50;">
 	<div class="lazyload"><div class='text-center'><img src="https://componentator.com/img/preloader.gif"></div></div>
@@ -70,10 +75,17 @@
 				$container.masonry({
 					itemSelector: '.item',		
 				});
-			});
-			el.after('<div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div>');
+				el.after('<div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div>');
+			});		
 	   	});
  	}
+        function reload() {
+          console.log('reload');
+          page = 1;
+          var lazy = $('.block-content .row');	
+	  $(lazy).html('<div data-jc="lazyload__null__selector:.lazyload;exec:lazyload;offset:50;"><div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div></div>');
+	  COMPILE();	      
+        } 
 </script>
 </body>
 </html>
