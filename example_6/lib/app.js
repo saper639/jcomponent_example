@@ -1,3 +1,4 @@
+  /*global and options var*/
   var arr_countries = [{id: 'au', name: 'Australia'}, {id: 'be', name: 'Belgium'}, {id: 'br', name: 'Brazil'}, {id: 'cn', name: 'China'},
                       {id: 'de', name: 'Germany'}, {id: 'fr', name: 'France'}, {id: 'gb', name: 'Great Britain'}, {id: 'it', name: 'Italy'},
 		      {id: 'jp', name: 'Japan'}, {id: 'ru', name: 'Russia'}, {id: 'si', name: 'Slovenia'}, {id: 'us', name: 'USA'} ];
@@ -16,8 +17,9 @@
   var tEnd = Tangular.compile($('#tEnd').html()); 	
 
   var container = $('#body');
-  //меню для маршрутизации
+  //init spa route
   NAV.clientside('.R');	
+  //route search
   NAV.route('#search', ()=>{
     SET('common.page', 'search');
     var lazy = $('.search_content').FIND('lazyload');
@@ -26,7 +28,7 @@
       COMPILE();	
     }
   });
-
+  //route top
   NAV.route('#top', ()=>{
     SET('common.page', 'top');
     $('.top_content').html('');      
@@ -37,13 +39,15 @@
 	COMPILE();	
     }  
   });
-
+  //route history
   NAV.route('#history', ()=>{
     SET('common.page', 'history');
   });
+  //route setting
   NAV.route('#setting', ()=>{
     SET('common.page', 'setting');
   });
+  //event on location
   NAV.on('location', function(url) {          
         console.log('location', url);      
   })
@@ -51,16 +55,22 @@
   WATCH('common.page', (path, value, type)=>{
     console.log(value);	
   })
-
+  //save option
   function save_option() {
      if (!VALIDATE('option.*')) return; 
      CACHE('option', option, '3 months'); 
      SETTER('notify', 'append', 'Settings successfully saved.');
   }
-
+  //lazyload for search page
   function lazyload_search(el) {
      console.log('lazy search'); 
-     AJAXCACHE('GET https://newsapi.org/v2/everything', { q: option.query||'футбол', language: option.language, apiKey:apiKey, pageSize: pageSize, page: common.pSearch, sortBy: option.sortBy }, (res, isFromCache) => {
+     AJAXCACHE('GET https://newsapi.org/v2/everything', { 
+		q: option.query||'футбол', 
+		language: option.language, 
+		apiKey:apiKey, 
+		pageSize: pageSize, 
+		page: common.pSearch, 
+		sortBy: option.sortBy }, (res, isFromCache) => {
  	if (!res.status || res.status=='error') {
 	     $(el).html(tEnd());
 	     return;	
@@ -78,10 +88,16 @@
 	});         
      }, '5 hours');
   }
-
+  //lazyload for top page
   function lazyload_top(el) {
      console.log('lazy top', common); 
-     AJAXCACHE('GET https://newsapi.org/v2/top-headlines', { country: option.country, category: option.category, apiKey:apiKey, pageSize: pageSize, page: common.pTop, sortBy: option.sortBy }, (res, err) => {        
+     AJAXCACHE('GET https://newsapi.org/v2/top-headlines', { 
+		country: option.country, 
+		category: option.category, 
+		apiKey:apiKey, 
+		pageSize: pageSize, 
+		page: common.pTop, 
+		sortBy: option.sortBy }, (res, err) => {        
  	if (!res.status || res.status=='error') {
 	     $(el).html(tEnd());
 	     return;	
@@ -98,7 +114,7 @@
 	});
     }, '5 hours');
   }
-
+  //button apply
   function apply_filter() {
      common.pSearch = 1;    
      $('.search_content').html('');
