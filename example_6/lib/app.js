@@ -10,11 +10,16 @@
 		      {id: 'it', name: 'Italiano'}, {id: 'ru', name: 'Русский'}, {id: 'zh', name: '中文'} ];
 
   var common = { 'pTop': 1, 'pSearch': 1};
-  var option = CACHE('option')||{country: 'ru', category:'general', language: 'ru', sortBy: 'publishedAt'};
+  SET('option', CACHE('option')||{country: 'ru', category:'general', language: 'ru', sortBy: 'publishedAt'});
   var apiKey = '0e1cee0bb93c47768333236ffebcd645';
   var pageSize = 20;
   var tCard = Tangular.compile($('#tCard').html());
   var tEnd = Tangular.compile($('#tEnd').html()); 	
+
+   Thelpers.select = function(value, arr) {
+       var res = arr.findItem('id', value);	
+       return (res) ? res.name : '';
+   };
 
   var container = $('#body');
   //init spa route
@@ -71,13 +76,15 @@
 		pageSize: pageSize, 
 		page: common.pSearch, 
 		sortBy: option.sortBy }, (res, isFromCache) => {
+
  	if (!res.status || res.status=='error') {
 	     $(el).html(tEnd());
 	     return;	
 	};
 
   	$(el).html(tCard(res));
-        common.pSearch += 1;
+
+        INC('common.pSearch', 1);
         var $container = $(el);
 	// Masonry + ImagesLoaded	
   	$container.imagesLoaded(function(){
@@ -103,7 +110,7 @@
 	     return;	
 	};
   	$(el).html(tCard(res));
-        common.pTop += 1;
+        INC('common.pTop', 1);
         var $container = $(el);
 	// Masonry + ImagesLoaded
 	$container.imagesLoaded(function(){
@@ -116,8 +123,13 @@
   }
   //button apply
   function apply_filter() {
-     common.pSearch = 1;    
+     SET('common.pSearch', 1);
      $('.search_content').html('');
      REDIRECT('#search');
      return false;
+  }
+  //view news
+  function url_view(e) {
+    console.log('view');
+    return false;
   }
