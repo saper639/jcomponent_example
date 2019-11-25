@@ -52,6 +52,9 @@
   NAV.route('#setting', ()=>{
     SET('common.page', 'setting');
   });
+  NAV.route('#view', ()=>{
+    SET('common.page', 'view');
+  });
   //event on location
   NAV.on('location', function(url) {          
         console.log('location', url);      
@@ -130,6 +133,7 @@
   }
   //view news
   function url_view(e) {
-    console.log('view');
+    SET('common.url', $(e).attr('data-url'));
+    REDIRECT('#view')
     return false;
   }

@@ -172,3 +172,6 @@ input:invalid { box-shadow: none; }
 .ui-checkbox-checked div { background-color: #4285F4; border-color: #4285F4; }
 .ui-checkbox-checked .fa { display: block !important; }
 .ui-checkbox.ui-disabled div { background-color: #F0F0F0 !important; border-color: #E0E0E0 !important; color: gray !important; }
+
+.ui-iframepreview { line-height: 0; }
+.ui-iframepreview iframe { width: 100%; height: 100%; padding: 0; margin: 0; display: block; }
