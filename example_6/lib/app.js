@@ -26,15 +26,22 @@
       COMPILE();	
     }
   });
+
   NAV.route('#top', ()=>{
     SET('common.page', 'top');
     $('.top_content').html('');      
     SET('common.pTop', 1);
-    setTimeout(()=>{
+    /*$('.top_content').append('<div data-jc="lazyload__null__selector:.lazyload;exec:lazyload_top;"><div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div></div>');
+    COMPILE();*/
+    var lazy = $('.top_content').FIND('lazyload');	
+    if (!lazy) {
 	$('.top_content').append('<div data-jc="lazyload__null__selector:.lazyload;exec:lazyload_top;"><div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div></div>');
 	COMPILE();	
-    }, 1000)    
+    } else {
+        $(lazy).html('<div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div>');
+      } 
   });
+
   NAV.route('#history', ()=>{
     SET('common.page', 'history');
   });
