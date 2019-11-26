@@ -47,6 +47,7 @@
   //route history
   NAV.route('#history', ()=>{
     SET('common.page', 'history');
+    SET('common.history', CACHE('history'))
   });
   //route setting
   NAV.route('#setting', ()=>{
@@ -72,13 +73,12 @@
   //lazyload for search page
   function lazyload_search(el) {
      console.log('lazy search'); 
-     AJAXCACHE('GET https://newsapi.org/v2/everything', { 
-		q: option.query||'футбол', 
-		language: option.language, 
-		apiKey:apiKey, 
-		pageSize: pageSize, 
-		page: common.pSearch, 
-		sortBy: option.sortBy }, (res, isFromCache) => {
+     var query = { q: option.query||'футбол', language: option.language, apiKey:apiKey, pageSize: pageSize, page: common.pSearch, sortBy: option.sortBy };
+     if (option.use_date) {
+         query.from = option.from.toISOString();
+         query.to = option.to.toISOString();
+     }
+     AJAXCACHE('GET https://newsapi.org/v2/everything', query, (res, isFromCache) => {
 
  	if (!res.status || res.status=='error') {
 	     $(el).html(tEnd());
@@ -128,12 +128,24 @@
   function apply_filter() {
      SET('common.pSearch', 1);
      $('.search_content').html('');
+     CACHE('option', option, '3 months'); 
      REDIRECT('#search');
      return false;
   }
   //view news
   function url_view(e) {
-    SET('common.url', $(e).attr('data-url'));
-    REDIRECT('#view')
+    var item = {
+	'url': $(e).attr('href'),
+	'title': $(e).attr('data-title'),
+	'description': $(e).attr('data-description'),
+	'thumb': $(e).attr('data-imgurl'),
+        'dt': NOW 
+    };
+    var history = CACHE('history')||[];
+    history.unshift(item); 
+    if (history.length > 100) history.pop;
+    CACHE('history', history, '3 months');
+    //SET('common.url', $(e).attr('data-url'));
+    //REDIRECT('#view')
     return false;
   }
