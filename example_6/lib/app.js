@@ -24,6 +24,7 @@
   var container = $('#body');
   //init spa route
   NAV.clientside('.R');	
+  NAV.hashtags = true;
   //route search
   NAV.route('#search', ()=>{
     SET('common.page', 'search');
@@ -61,9 +62,9 @@
         console.log('location', url);      
   })
   
-  WATCH('common.page', (path, value, type)=>{
+  /*WATCH('common.page', (path, value, type)=>{
     console.log(value);	
-  })
+  })*/
   //save option
   function save_option() {
      if (!VALIDATE('option.*')) return; 

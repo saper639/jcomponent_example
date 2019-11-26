@@ -1402,3 +1402,26 @@ COMPONENT('iframepreview', function(self) {
 			self.write(value);*/
 	};
 });
+
+COMPONENT('click', function(self, config) {
+
+	self.readonly();
+
+	self.click = function() {
+		if (config.disabled)
+			return;
+		if (config.value)
+			self.set(self.parser(config.value));
+		else
+			self.get(self.attrd('jc-path'))(self);
+	};
+
+	self.make = function() {
+		self.event('click', self.click);
+		config.enter && $(config.enter === '?' ? self.scope : config.enter).on('keydown', 'input', function(e) {
+			e.which === 13 && setTimeout(function() {
+				!self.element[0].disabled && self.click();
+			}, 100);
+		});
+	};
+});

@@ -59,12 +59,13 @@
         <div class="collapse navbar-collapse" id="navbar-collapse" data---="selected__common.page__selector:li;class:active;">
      	 <ul class="nav navbar-nav navbar-left">
 	   <li>
-	     <form class="navbar-form form-inline" role="form">
+	     <div class="navbar-form form-inline" role="form" id="form_filter">
 	        <div class="form-group">
   	            <div data---="textbox__option.query__placeholder:Enter the search string;class:form-control;"></div>	   
                 </div>
-                <button type='button' data-bind="null__click:apply_filter" class='btn btn-default'><i class="fa fa-filter" aria-hidden="true"></i> Apply</button>
-            </form>
+                <button type='button' data-jc="click__apply_filter__enter:#form_filter" class='btn btn-default'><i class="fa fa-filter" aria-hidden="true"></i> Apply</button>
+                <!--<button type='button' data-bind="null__click:apply_filter" class='btn btn-default'><i class="fa fa-filter" aria-hidden="true"></i> Apply</button>-->
+            </div>
            <li>
 	   <li data-if="search"><a href="#search" class="R"><i class="fa fa-search" aria-hidden="true"></i> Search</a></li>
 	   <li data-if="top"><a href="#top" class="R"><i class="fa fa-star" aria-hidden="true"></i> Top News</a></li>
