@@ -35,7 +35,7 @@
              </div>   
            </a>  
            <div class='caption'>
-	      <h3>{{article.title}}<br><small>{{article.publishedAt|format('dd.MM.yyyy hh:mm')}}</small></h3>
+	      <h3><a href='#view' data-url='{{article.url}}' data-imgurl='{{article.urlToImage}}' data-description='{{article.description}}' data-bind="null__click:url_view">{{article.title}}</a><br><small>{{article.publishedAt|format('dd.MM.yyyy hh:mm')}}</small></h3>
               <p>{{article.description}}</p>  
            </div>
         </div>
@@ -81,15 +81,32 @@
        <h1>Hello</h1>
        <hr>
        <p>This is a test SPA app. News aggregator.<br><br>You can search for news from all over the world and in different languages.</p>  
+       <p>You can also change the <a href='#setting' class="R">settings</a></p>
     </div>
     <div data-jc="part__common.page__if:search" class='hidden'>
        <h1>Search news</h1>
+       <div data-bind="option__template" style='color:gray'>
+	  <script type="text/html">
+              {{ if value.query }}<span>Query string: {{value.query}}</span>  {{ fi }}
+              {{ if value.language }}<span>Language: {{value.language|select(arr_language)}}</span>  {{ fi }}
+              {{ if value.sortBy }}<span>Sort: {{value.sortBy|select(arr_sortby)}} </span>  {{ fi }}
+              {{ if value.use_date }}<span>From date: {{value.from|format('dd.MM.yyyy')}}, To date: {{value.to|format('dd.MM.yyyy')}} </span>{{ fi }}
+	  </script>
+       </div>
        <hr>
        <div class='row search_content'>	
        </div>
     </div>
     <div data-jc="part__common.page__if:top" class='hidden'>
        <h1>Top news</h1>
+       <div data-bind="option__template" style='color:gray'>
+	  <script type="text/html">
+              {{ if value.category }}<span>Category: {{value.category|select(arr_categories)}}</span>  {{ fi }}
+              {{ if value.country }}<span>Country: {{value.country|select(arr_countries)}}</span>  {{ fi }}
+              {{ if value.language }}<span>Language: {{value.language|select(arr_language)}} </span>  {{ fi }}
+              {{ if value.sortBy }}<span>Sort: {{value.sortBy|select(arr_sortby)}} </span>{{ fi }}
+	  </script>
+       </div>
        <hr>
        <div class='row top_content'>	
        </div>   
@@ -97,6 +114,15 @@
     <div data-jc="part__common.page__if:history" class='hidden'>
        <h1>History</h1>
        <hr>
+    </div>
+    <div data-jc="part__common.page__if:view" class='hidden'>
+       <h1>News view</h1>
+       <hr>
+       <div class='row'>
+         <div class='col-md-12'>
+            <div data---="iframepreview__common.url"></div>
+         </div>
+       </div>
     </div>
     <div data-jc="part__common.page__if:setting" class='hidden'>
        <h1>Settings</h1>

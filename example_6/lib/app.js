@@ -10,11 +10,16 @@
 		      {id: 'it', name: 'Italiano'}, {id: 'ru', name: 'Русский'}, {id: 'zh', name: '中文'} ];
 
   var common = { 'pTop': 1, 'pSearch': 1};
-  var option = CACHE('option')||{country: 'ru', category:'general', language: 'ru', sortBy: 'publishedAt'};
+  SET('option', CACHE('option')||{country: 'ru', category:'general', language: 'ru', sortBy: 'publishedAt'});
   var apiKey = '0e1cee0bb93c47768333236ffebcd645';
   var pageSize = 20;
   var tCard = Tangular.compile($('#tCard').html());
   var tEnd = Tangular.compile($('#tEnd').html()); 	
+
+   Thelpers.select = function(value, arr) {
+       var res = arr.findItem('id', value);	
+       return (res) ? res.name : '';
+   };
 
   var container = $('#body');
   //init spa route
@@ -35,8 +40,8 @@
     SET('common.pTop', 1);
     var lazy = $('.top_content').FIND('lazyload');	
     if (!lazy) {
-      $('.top_content').append('<div data-jc="lazyload__null__selector:.lazyload;exec:lazyload_top;"><div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div></div>');
-      COMPILE();	
+	$('.top_content').append('<div data-jc="lazyload__null__selector:.lazyload;exec:lazyload_top;"><div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div></div>');
+	COMPILE();	
     }  
   });
   //route history
@@ -46,6 +51,9 @@
   //route setting
   NAV.route('#setting', ()=>{
     SET('common.page', 'setting');
+  });
+  NAV.route('#view', ()=>{
+    SET('common.page', 'view');
   });
   //event on location
   NAV.on('location', function(url) {          
@@ -71,12 +79,15 @@
 		pageSize: pageSize, 
 		page: common.pSearch, 
 		sortBy: option.sortBy }, (res, isFromCache) => {
+
  	if (!res.status || res.status=='error') {
 	     $(el).html(tEnd());
 	     return;	
 	};
 
-  	$(el).html(tCard(res));        
+  	$(el).html(tCard(res));
+
+        INC('common.pSearch', 1);
         var $container = $(el);
 	// Masonry + ImagesLoaded	
   	$container.imagesLoaded(function(){
@@ -84,7 +95,6 @@
 	    	   itemSelector: '.item'
 	      });
 	      el.after('<div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div>');
-	      common.pSearch += 1;
 	});         
      }, '5 hours');
   }
@@ -103,6 +113,7 @@
 	     return;	
 	};
   	$(el).html(tCard(res));
+        INC('common.pTop', 1);
         var $container = $(el);
 	// Masonry + ImagesLoaded
 	$container.imagesLoaded(function(){
@@ -110,14 +121,19 @@
 		itemSelector: '.item',
 	      });
 	      el.after('<div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div>');
-	      common.pTop += 1;
 	});
     }, '5 hours');
   }
   //button apply
   function apply_filter() {
-     common.pSearch = 1;    
+     SET('common.pSearch', 1);
      $('.search_content').html('');
      REDIRECT('#search');
      return false;
+  }
+  //view news
+  function url_view(e) {
+    SET('common.url', $(e).attr('data-url'));
+    REDIRECT('#view')
+    return false;
   }

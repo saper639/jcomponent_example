@@ -1344,3 +1344,61 @@ COMPONENT('lazycontent', function(self, config) {
 		setTimeout2('$lazycontent.refresh', window.$lazycontent_refresh, 200);
 	};
 });
+
+COMPONENT('iframepreview', function(self) {
+
+	var iframe;
+
+	self.readonly();
+	self.nocompile && self.nocompile();
+
+	self.make = function() {
+		self.aclass('ui-iframepreview');
+		self.html('<iframe src="about:blank" frameborder="0" height="1000px"></iframe>');
+		iframe = self.find('iframe');
+	};
+
+	self.write = function(content) {
+
+		var is = false;
+		var offset = '<div id="IFPOFFSET"></div>';
+
+		content = content.replace(/<\/body>/i, function() {
+			is = true;
+			return offset + '</body>';
+		});
+
+		if (!is)
+			content += offset;
+
+		var doc = iframe[0].contentWindow.document;
+		doc.open();
+		doc.write(content);
+		doc.close();
+		self.resize();
+		setTimeout(self.resize, 500);
+		setTimeout(self.resize, 1000);
+		setTimeout(self.resize, 2000);
+		setTimeout(self.resize, 3000);
+	};
+
+	self.resize = function() {
+		var el = $(iframe[0].contentWindow.document.getElementById('IFPOFFSET'));
+		if (el) {
+			var offset = el.offset();
+			if (offset) {
+				self.element.css('height', offset.top);
+				if (offset.top == 0)
+					setTimeout(self.resize, 1000);
+			}
+		}
+	};
+
+	self.setter = function(value) {
+		iframe.attr('src', value);
+		/*if (value == null)
+			iframe.attr('src', 'about:blank');
+		else
+			self.write(value);*/
+	};
+});
