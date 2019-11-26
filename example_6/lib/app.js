@@ -35,8 +35,8 @@
     SET('common.pTop', 1);
     var lazy = $('.top_content').FIND('lazyload');	
     if (!lazy) {
-	$('.top_content').append('<div data-jc="lazyload__null__selector:.lazyload;exec:lazyload_top;"><div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div></div>');
-	COMPILE();	
+      $('.top_content').append('<div data-jc="lazyload__null__selector:.lazyload;exec:lazyload_top;"><div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div></div>');
+      COMPILE();	
     }  
   });
   //route history
@@ -76,8 +76,7 @@
 	     return;	
 	};
 
-  	$(el).html(tCard(res));
-        common.pSearch += 1;
+  	$(el).html(tCard(res));        
         var $container = $(el);
 	// Masonry + ImagesLoaded	
   	$container.imagesLoaded(function(){
@@ -85,6 +84,7 @@
 	    	   itemSelector: '.item'
 	      });
 	      el.after('<div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div>');
+	      common.pSearch += 1;
 	});         
      }, '5 hours');
   }
@@ -103,7 +103,6 @@
 	     return;	
 	};
   	$(el).html(tCard(res));
-        common.pTop += 1;
         var $container = $(el);
 	// Masonry + ImagesLoaded
 	$container.imagesLoaded(function(){
@@ -111,6 +110,7 @@
 		itemSelector: '.item',
 	      });
 	      el.after('<div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div>');
+	      common.pTop += 1;
 	});
     }, '5 hours');
   }
