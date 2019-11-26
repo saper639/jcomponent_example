@@ -143,7 +143,7 @@
     };
     var history = CACHE('history')||[];
     history.unshift(item); 
-    if (history.length > 100) history.pop;
+    if (history.length > 100) history.pop();
     CACHE('history', history, '3 months');
     //SET('common.url', $(e).attr('data-url'));
     //REDIRECT('#view')
