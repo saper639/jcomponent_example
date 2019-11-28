@@ -1,18 +1,19 @@
 body {background-color:#fbfbfb;}
+.form-group { margin-bottom: 10px; }
 .block-content {
  box-shadow: 0px 0px 10px 0px rgba(119, 119, 119, 0.36);
  -moz-box-shadow: 0px 0px 10px 0px rgba(119, 119, 119, 0.36);
  -webkit-box-shadow: 0px 0px 10px 0px rgba(119, 119, 119, 0.36);
  background-color: rgb(251, 251, 251);
- min-height: 500px;
+ min-height: 800px;
 }
-
-m10 { margin: 10px!important; }
-mb10 { margin-bottom: 10px!important; }
-.block-content .item { 
+.mr5 { margin-right: 5px!important; }
+.m10 { margin: 10px!important; }
+.mb10 { margin-bottom: 10px!important; }
+.search_content .item, .top_content .item { 
     opacity: 0; 
     transition: opacity 0.3s, visibility 0.3s;}
-.block-content .item.masonry-brick { 
+.search_content .item.masonry-brick, .top_content .item.masonry-brick { 
     visibility: visible;
     opacity: 1;
     transition: opacity 0.3s, visibility 0.3s;

@@ -24,7 +24,7 @@
   var container = $('#body');
   //init spa route
   NAV.clientside('.R');	
-  NAV.hashtags = true;
+ //NAV.hashtags = true;
   //route search
   NAV.route('#search', ()=>{
     SET('common.page', 'search');
