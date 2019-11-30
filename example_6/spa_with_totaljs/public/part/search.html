@@ -1,2 +1,11 @@
 <h1>Search news</h1>
+<div data-bind="option__template" style='color:gray'>
+  <script type="text/html">
+          {{ if value.query }}<span>Query string: {{value.query}}</span> | {{ fi }}
+          {{ if value.language }}<span>Language: {{value.language|select(arr_language)}}</span> | {{ fi }}
+          {{ if value.sortBy }}<span>Sort: {{value.sortBy|select(arr_sortby)}} </span> | {{ fi }}
+          {{ if value.use_date }}<span>From date: {{value.from|format('dd.MM.yyyy')}}, To date: {{value.to|format('dd.MM.yyyy')}} | </span>{{ fi }}
+  </script>
+</div>
 <hr>
+<div class='row search_content'></div>	

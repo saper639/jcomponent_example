@@ -32,8 +32,7 @@
                         <div class="form-group">
                             <div data---="textbox__option.query__placeholder:Enter the search string;class:form-control;" class='mr5'></div>	   
                             </div>
-                            <button type='button' data-jc="click__apply_filter__enter:#form_filter" class='btn btn-default'><i class="fa fa-filter" aria-hidden="true"></i> Apply</button>
-                            <!--<button type='button' data-bind="null__click:apply_filter" class='btn btn-default'><i class="fa fa-filter" aria-hidden="true"></i> Apply</button>-->
+                            <button type='button' data-jc="click__apply_filter__enter:#form_filter" class='btn btn-default'><i class="fa fa-filter" aria-hidden="true"></i> Apply</button>                            
                         </div>
                    <li>
                    <li data-if="search"><a href="@{#}/search" class="R"><i class="fa fa-search" aria-hidden="true"></i> Search</a></li>
@@ -45,7 +44,15 @@
                  </ul>
           </div>
        </nav>
-    </header>  
+    </header>
+    <div id="body" class='m10'>
+        <div data-import="url:/part/template.html;init:initTemplate"></div>        
+        <div data-jc="part__common.page__url:/part/hello.html" class='hidden'></div>
+        <div data-jc="part__common.page__if:search;url:/part/search.html" class='hidden'></div>
+        <div data-jc="part__common.page__if:top;url:/part/top.html" class='hidden'></div>
+        <div data-jc="part__common.page__if:history;url:/part/history.html" class='hidden'></div>
+        <div data-jc="part__common.page__if:setting;url:/part/setting.html" class='hidden'></div>
+    </div>    
 </div>     
 @{import('app.js')}
 </body>

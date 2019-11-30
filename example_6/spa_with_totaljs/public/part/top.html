@@ -1,2 +1,11 @@
 <h1>Top news</h1>
+<div data-bind="option__template" style='color:gray'>
+    <script type="text/html">
+          {{ if value.category }}<span>Category: {{value.category|select(arr_categories)}}</span> | {{ fi }}
+          {{ if value.country }}<span>Country: {{value.country|select(arr_countries)}}</span> | {{ fi }}
+          {{ if value.language }}<span>Language: {{value.language|select(arr_language)}} </span> | {{ fi }}
+          {{ if value.sortBy }}<span>Sort: {{value.sortBy|select(arr_sortby)}} </span> | {{ fi }}
+    </script>
+</div>
 <hr>
+<div class='row top_content'></div>   

@@ -1,0 +1,29 @@
+<h1>Setting</h1>
+<hr>
+<div class='row'>
+  <div class='col-md-4 center-block' style='float:none;'>
+    <div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
+        <div class="form-group">
+            <div data---="dropdown__option.country__datasource:arr_countries;class:form-control;">Country</div>
+        </div>
+        <div class="form-group">
+            <div data---="dropdown__option.category__datasource:arr_categories;class:form-control;">Category</div>
+        </div>
+        <div class="form-group">
+            <div data---="dropdown__option.language__datasource:arr_language;class:form-control;">Language</div>
+        </div>
+        <div class="form-group">
+            <div data---="dropdown__option.sortBy__datasource:arr_sortby;class:form-control;">Sort By</div>
+        </div>
+        <div data---="checkbox__option.use_date" class='mb10'>Use date period?</div> 
+        <div data-bind="option.use_date__hide:!value">
+            <div data---="textbox__option.from__type:date;format:dd.MM.yyyy;required:true;" class='mb10'>From date</div>	 
+            <div data---="textbox__option.to__type:date;format:dd.MM.yyyy;required:true;" class='mb10'>To date</div>
+        </div>
+        <div class="form-group text-center">
+            <hr> 
+            <button data-bind="null__click:save_option" class='btn btn-default btn-sm'>Save options</button>
+        </div>  
+    </div>
+  </div>
+</div>
