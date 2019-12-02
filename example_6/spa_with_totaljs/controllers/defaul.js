@@ -5,11 +5,15 @@ exports.install = function() {
 };
 
 function news_search() {
-	var self = this;
-	self.plain('search');
+	var self = this;	
+	MODULE('News').search(self.query, (err, res)=>{
+		return self.json(res);
+	})
 }
 
 function news_top() {
 	var self = this;		
-	self.plain('top');
+	MODULE('News').top(self.query, (err, res)=>{
+		return self.json(res);
+	})
 }

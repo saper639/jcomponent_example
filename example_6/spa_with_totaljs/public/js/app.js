@@ -33,7 +33,7 @@
         setTimeout(()=>{
             $('.search_content').append('<div data-jc="lazyload__null__selector:.lazyload;exec:lazyload_search;"><div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div></div>');
             COMPILE();	
-        }, 500);    
+        }, 1000);    
     }
   });
   //page top
@@ -46,7 +46,7 @@
         setTimeout(()=>{
             $('.top_content').append('<div data-jc="lazyload__null__selector:.lazyload;exec:lazyload_top;"><div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div></div>');
             COMPILE();	
-        }, 500);            
+        }, 1000);            
     }      
   });
   //page history
@@ -59,14 +59,19 @@
     SET('common.page', 'setting');
   });
   function lazyload_search(el) {
-      console.log('lazy search');
-      AJAX('GET api/news/search', {'option': option, 'page': common.pSearch}, (res, err)=>{
+     var query = { q: option.query||'футбол', language: option.language, pageSize: option.pageSize, page: common.pSearch, sortBy: option.sortBy };
+     if (option.use_date) {
+         query.from = option.from.toISOString();
+         query.to = option.to.toISOString();
+     }
+     AJAX('GET api/news/search', query, (res, err)=>{
           
-      })
+     })
   };
   function lazyload_top(el) {
       console.log('lazy top');
-      AJAX('GET api/news/top', {'option': option, 'page': common.pSearch}, (res, err)=>{
+      var query = { language: option.language, category: option.category, pageSize: option.pageSize, page: common.pTop, sortBy: option.sortBy };
+      AJAX('GET api/news/top', query, (res, err)=>{
           
       })
   };
