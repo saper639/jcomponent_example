@@ -1,0 +1,32 @@
+/* Notifications */
+.ui-toast-container { position: fixed; z-index: 10000; padding: 5px 5px 0 0;}
+.ui-toast-container.top-center{top:0;right:0;width:100%}
+.ui-toast-container.bottom-center{bottom:0;right:0;width:100%}
+.ui-toast-container.top-full-width{top:0;right:0;width:100%}
+.ui-toast-container.bottom-full-width{bottom:0;right:0;width:100%}
+.ui-toast-container.top-left{top:12px;left:12px}
+.ui-toast-container.top-right{top:12px;right:12px}
+.ui-toast-container.bottom-right{right:12px;bottom:12px}
+.ui-toast-container.bottom-left{bottom:12px;left:12px}
+.ui-toast-container.bottom-center>div,.ui-toast-container.top-center>div{width:300px;margin-left:auto;margin-right:auto}
+.ui-toast-container.bottom-full-width>div,.ui-toast-container.top-full-width>div{width:96%;margin-left:auto;margin-right:auto}
+.ui-toast-container>div {width:300px;}
+.ui-toast { background-color: white; box-shadow: 0 0 3px #999; border-radius: 3px; font-size: 14px; padding: 15px 15px 15px 10px; margin: 0 0 6px; position: relative; display: flex; opacity:.9;}
+.ui-toast .loader{  display: block; width: 0%; position:absolute;left:0;bottom:0;height:4px;/*background-color:#000;opacity:.4;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=40);filter:alpha(opacity=40)*/}
+.ui-toast .loaded { width: 100%; }
+.ui-toast:hover { -moz-box-shadow: 0 0 4px #999; -webkit-box-shadow: 0 0 4px #999; box-shadow: 0 0 4px #999; opacity: 1; -ms-filter: alpha(opacity=100); filter: alpha(opacity=100); }
+.ui-toast > i { position: absolute; right: 12px; top: 10px; color: #AAB2BD; font-size: 14px; cursor: pointer; text-shadow:0 1px 0 #fff; opacity:.8; }
+.ui-toast > i:active { top: 11px; }
+.ui-toast > i:hover { color:#000; text-decoration:none; cursor:pointer; opacity:.4; -ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=40); filter:alpha(opacity=40) }
+.ui-toast-icon{ float: left; font-size: 24px; color: #AAB2BD; line-height: 24px; /*padding-right:0.5em;*/ margin: auto 0.1em; }
+.ui-toast-message{ margin: 1px 0 0 10px; color: gray; max-height: 150px; }
+.ui-toast-datetime{ font-size: 10px; color: #A0A0A0; margin-bottom: 4px; padding-top: 5px; }
+.ui-toast.success{ background-color: #1ab394;}
+.ui-toast.error{ background-color: #ed5565;}
+.ui-toast.info{ background-color: #2f96b4;}
+.ui-toast.warning{ background-color: #F89406;}
+.ui-toast.success > i, .ui-toast.error > i, .ui-toast.info > i, .ui-toast.warning > i { color: #fff; }
+.ui-toast.success > i:hover, .ui-toast.error > i:hover, .ui-toast.info > i:hover, .ui-toast.warning > i:hover { color:#000; text-decoration:none; opacity:.4; -ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=40); filter:alpha(opacity=40) }
+.ui-toast.success .ui-toast-icon, .ui-toast.error .ui-toast-icon, .ui-toast.info .ui-toast-icon, .ui-toast.warning .ui-toast-icon { color: #fff; }
+.ui-toast.success .ui-toast-message, .ui-toast.error .ui-toast-message, .ui-toast.info .ui-toast-message, .ui-toast.warning .ui-toast-message { color:  #fff;  }
+.ui-toast.success .ui-toast-datetime, .ui-toast.error .ui-toast-datetime, .ui-toast.info .ui-toast-datetime, .ui-toast.warning .ui-toast-datetime { color: #F5F5F5; } { color: #E0E0E0; }

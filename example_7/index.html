@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Пример 7 - компонента Toast</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<script src="https://cdn.componentator.com/spa.min@18.js"></script>
+	<link rel="stylesheet" href="ui.css" />
+	<script src="ui.js"></script>
+</head>	
+<body>
+	<div data-jc="toast" data-jc-config='timeout:6;format:dd\.MM\.yyyy hh\:mm;animate:fade;'></div>
+	<div class='container'>
+ 		<div class='row'>
+     		<div class='col-md-8 center-block' style='float:none;'>
+     			<div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
+     				<h4>Примеры использования компонтент j-toast</h4>
+     				Toast type events:<br>
+     				<button data-bind="null__click:type_event" data-type='success' class='btn btn-default btn-sm'>Success</button>     				
+     				<button data-bind="null__click:type_event" data-type='warning' class='btn btn-default btn-sm'>Warning</button>     				
+     				<button data-bind="null__click:type_event" data-type='error'   class='btn btn-default btn-sm'>Error</button>     				
+     				<button data-bind="null__click:type_event" data-type='info'    class='btn btn-default btn-sm'>Info</button>     				
+     				<button data-bind="null__click:type_event" data-type='no'      class='btn btn-default btn-sm'>No Type</button>     				
+     				<hr>
+     				Toast with date view:<br>
+     				<button data-bind="null__click:type_event_dt" data-type='success' data-day='-2' class='btn btn-default btn-sm'>Success with date (-2 days)</button>     				
+     				<button data-bind="null__click:type_event_dt" data-type='warning' data-day='-5' class='btn btn-default btn-sm'>Warning with date (-5 days)</button>     				
+     				<button data-bind="null__click:type_event_dt" data-type='error'  data-day='0' class='btn btn-default btn-sm'>Error with date (current)</button>     				     				
+     				<button data-bind="null__click:type_event_dt" data-type='no'     data-day='2' class='btn btn-default btn-sm'>No Type with date(+2 days)</button>
+     				<hr>   
+     				Toast with with special icon:<br>  		
+     				<button data-bind="null__click:type_event_dt" data-type='success' data-day='-2' data-icon='thermometer-full' class='btn btn-default btn-sm'>Success with icon and date</button>     
+     				<button data-bind="null__click:type_event_dt" data-type='no'     data-icon='battery-quarter' class='btn btn-default btn-sm'>No Type with icon without date</button>   
+     				<hr>   
+     				Toast with with image:<br>  							
+     				<button data-bind="null__click:type_event_dt" data-type='error'  data-img='test' data-day='2' class='btn btn-default btn-sm'>Error with date (current)</button>     				     					
+     				<button data-bind="null__click:type_event_dt" data-type='no'     data-img='test' class='btn btn-default btn-sm'>No Type with icon without date</button>   
+     				<hr>   
+     				Toast with with special timeout:<br>  							
+     				<button data-bind="null__click:type_event_dt" data-type='success' data-day='2' data-timeout='10' class='btn btn-default btn-sm'>Success</button>     				     					
+     				<button data-bind="null__click:type_event_dt" data-type='no' data-icon='battery-quarter' data-timeout='15'  class='btn btn-default btn-sm'>No Type with icon without date</button>   
+     			</div>	
+     		</div>	
+     	</div>
+    </div> 			
+
+<script>
+var toast;
+FIND('toast', function(comp) {    
+    toast = comp;    	               
+});                    
+
+//view result example 
+function type_event(e) {
+	var str = ['<b>Title</b><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', 
+			   'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod']; 			   
+	var ind = getRandom(2);			   
+	switch (e.data('type')) {
+		case 'success' : toast.success(str[ind]); break;
+		case 'warning' : toast.warning(str[ind]); break;
+		case 'error'   : toast.error(str[ind]);  break;
+		case 'info'    : toast.info(str[ind]);    break;
+		default: toast.append(str[ind]);
+
+	};		   	
+}
+function type_event_dt(e) {
+	var str = ['<b>Title</b><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', 
+			   'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod']; 			   
+	var ind = getRandom(2);	
+	var options = {};	
+	if (parseInt(e.data('day')) > -100) {
+		options.date = new Date().add(e.data('day')+ ' day');
+	}
+
+	if (e.data('icon')) {
+		options.icon = e.data('icon');
+	}
+
+	if (e.data('img')) {
+		options.img = 'https://dummyimage.com/50x50/000/fff.jpg';
+	}
+
+	if (e.data('timeout')) {
+		options.timeout = e.data('timeout');
+	}
+
+	switch (e.data('type')) {
+		case 'success' : toast.success(str[ind], options); break;
+		case 'warning' : toast.warning(str[ind], options); break;		
+		case 'error' : toast.error(str[ind], options); break;
+		case 'info' : toast.info(str[ind], options); break;
+		default: toast.append(str[ind], options);
+	}		   			   		
+}	
+
+function getRandom(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+</script>	
+</body>
+</html>
