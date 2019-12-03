@@ -12,33 +12,70 @@
 	<div data-jc="toast" data-jc-config='timeout:6;format:dd\.MM\.yyyy hh\:mm;animate:fade;'></div>
 	<div class='container'>
  		<div class='row'>
-     		<div class='col-md-8 center-block' style='float:none;'>
+     		<div class='col-md-10 center-block' style='float:none;'>
      			<div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
      				<h4>Примеры использования компонтент j-toast</h4>
-     				Toast type events:<br>
-     				<button data-bind="null__click:type_event" data-type='success' class='btn btn-default btn-sm'>Success</button>     				
-     				<button data-bind="null__click:type_event" data-type='warning' class='btn btn-default btn-sm'>Warning</button>     				
-     				<button data-bind="null__click:type_event" data-type='error'   class='btn btn-default btn-sm'>Error</button>     				
-     				<button data-bind="null__click:type_event" data-type='info'    class='btn btn-default btn-sm'>Info</button>     				
-     				<button data-bind="null__click:type_event" data-type='no'      class='btn btn-default btn-sm'>No Type</button>     				
-     				<hr>
-     				Toast with date view:<br>
-     				<button data-bind="null__click:type_event_dt" data-type='success' data-day='-2' class='btn btn-default btn-sm'>Success with date (-2 days)</button>     				
-     				<button data-bind="null__click:type_event_dt" data-type='warning' data-day='-5' class='btn btn-default btn-sm'>Warning with date (-5 days)</button>     				
-     				<button data-bind="null__click:type_event_dt" data-type='error'  data-day='0' class='btn btn-default btn-sm'>Error with date (current)</button>     				     				
-     				<button data-bind="null__click:type_event_dt" data-type='no'     data-day='2' class='btn btn-default btn-sm'>No Type with date(+2 days)</button>
-     				<hr>   
-     				Toast with with special icon:<br>  		
-     				<button data-bind="null__click:type_event_dt" data-type='success' data-day='-2' data-icon='thermometer-full' class='btn btn-default btn-sm'>Success with icon and date</button>     
-     				<button data-bind="null__click:type_event_dt" data-type='no'     data-icon='battery-quarter' class='btn btn-default btn-sm'>No Type with icon without date</button>   
-     				<hr>   
-     				Toast with with image:<br>  							
-     				<button data-bind="null__click:type_event_dt" data-type='error'  data-img='test' data-day='2' class='btn btn-default btn-sm'>Error with date (current)</button>     				     					
-     				<button data-bind="null__click:type_event_dt" data-type='no'     data-img='test' class='btn btn-default btn-sm'>No Type with icon without date</button>   
-     				<hr>   
-     				Toast with with special timeout:<br>  							
-     				<button data-bind="null__click:type_event_dt" data-type='success' data-day='2' data-timeout='10' class='btn btn-default btn-sm'>Success</button>     				     					
-     				<button data-bind="null__click:type_event_dt" data-type='no' data-icon='battery-quarter' data-timeout='15'  class='btn btn-default btn-sm'>No Type with icon without date</button>   
+     				<div class='row'>
+     					<div class='col-md-8'>
+     					  <div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
+		     				Toast type events:<br>
+		     				<button data-bind="null__click:example" data-type='success' class='btn btn-default btn-sm'>Success</button>     				
+		     				<button data-bind="null__click:example" data-type='warning' class='btn btn-default btn-sm'>Warning</button>     				
+		     				<button data-bind="null__click:example" data-type='error'   class='btn btn-default btn-sm'>Error</button>     				
+		     				<button data-bind="null__click:example" data-type='info'    class='btn btn-default btn-sm'>Info</button>     				
+		     				<button data-bind="null__click:example" data-type='no'      class='btn btn-default btn-sm'>No Type</button>     				
+		     				<hr>
+		     				Toast with date view:<br>
+		     				<button data-bind="null__click:example" data-type='success' data-day='-2' class='btn btn-default btn-sm'>Success with date (-2 days)</button>     				
+		     				<button data-bind="null__click:example" data-type='warning' data-day='-5' class='btn btn-default btn-sm'>Warning with date (-5 days)</button>     				
+		     				<button data-bind="null__click:example" data-type='error'  data-day='0' class='btn btn-default btn-sm'>Error with date (current)</button>     				     				
+		     				<button data-bind="null__click:example" data-type='no'     data-day='2' class='btn btn-default btn-sm'>No Type with date(+2 days)</button>
+		     				<hr>   
+		     				Toast with with special icon:<br>  		
+		     				<button data-bind="null__click:example" data-type='success' data-day='-2' data-icon='thermometer-full' class='btn btn-default btn-sm'>Success with icon and date</button>     
+		     				<button data-bind="null__click:example" data-type='no'     data-icon='battery-quarter' class='btn btn-default btn-sm'>No Type with icon without date</button>   
+		     				<hr>   
+		     				Toast with with image:<br>  							
+		     				<button data-bind="null__click:example" data-type='error'  data-img='test' data-day='2' class='btn btn-default btn-sm'>Error with date (current)</button>     				     					
+		     				<button data-bind="null__click:example" data-type='no'     data-img='test' class='btn btn-default btn-sm'>No Type with icon without date</button>   
+		     				<hr>   
+		     				Toast with with special timeout:<br>  							
+		     				<button data-bind="null__click:example" data-type='success' data-day='2' data-timeout='10' class='btn btn-default btn-sm'>Success</button>     				     					
+		     				<button data-bind="null__click:example" data-type='no' data-icon='battery-quarter' data-timeout='15'  class='btn btn-default btn-sm'>No Type with icon without date</button>   
+		     				<hr>   
+		     				Toast with callback:<br>  							
+		     				<button data-bind="null__click:example_callback" class='btn btn-default btn-sm'>Success</button>     				     		
+		     			   </div>	
+		     			</div>			
+		     			<div class='col-md-4'>     				
+		     			  <div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
+		     				<b>Reconfigure</b><br><br>
+							Change position:<br>
+							<button data-bind="null__click:reconfigure" data-position='top-center' class='btn btn-default btn-sm'>top center</button>   
+							<button data-bind="null__click:reconfigure" data-position='bottom-center' class='btn btn-default btn-sm'>bottom center</button>   
+							<button data-bind="null__click:reconfigure" data-position='top-full-width' class='btn btn-default btn-sm'>top full width</button>   
+							<button data-bind="null__click:reconfigure" data-position='bottom-full-width' class='btn btn-default btn-sm'>bottom full width</button>   
+							<button data-bind="null__click:reconfigure" data-position='top-left' class='btn btn-default btn-sm'>top left</button> 
+							<button data-bind="null__click:reconfigure" data-position='top-right' class='btn btn-default btn-sm'>top right</button> 
+							<button data-bind="null__click:reconfigure" data-position='bottom-right' class='btn btn-default btn-sm'>bottom right</button> 
+							<button data-bind="null__click:reconfigure" data-position='bottom-left' class='btn btn-default btn-sm'>bottom left</button> 
+							<button data-bind="null__click:reconfigure" data-position='bottom-center' class='btn btn-default btn-sm'>bottom center</button> 
+							<button data-bind="null__click:reconfigure" data-position='bottom-full-width' class='btn btn-default btn-sm'>bottom full width</button> 
+							<hr>
+							Animate:<br>
+							<button data-bind="null__click:reconfigure" data-animate='fade' class='btn btn-default btn-sm'>fade</button>   
+							<button data-bind="null__click:reconfigure" data-animate='slide' class='btn btn-default btn-sm'>slide</button>		
+							<hr>
+							Loader:<br>
+							<button data-bind="null__click:reconfigure" data-loader='yes' class='btn btn-default btn-sm'>yes</button>   
+							<button data-bind="null__click:reconfigure" data-loader='no' class='btn btn-default btn-sm'>no</button>	
+							<hr>	
+							Timeout view:<br>
+							<button data-bind="null__click:reconfigure" data-timeout='5' class='btn btn-default btn-sm'>5 sec</button>   
+							<button data-bind="null__click:reconfigure" data-timeout='10' class='btn btn-default btn-sm'>10 sec</button>		
+							<button data-bind="null__click:reconfigure" data-timeout='15' class='btn btn-default btn-sm'>15 sec</button>		
+						  </div>	
+						</div>	
      			</div>	
      		</div>	
      	</div>
@@ -50,21 +87,7 @@ FIND('toast', function(comp) {
     toast = comp;    	               
 });                    
 
-//view result example 
-function type_event(e) {
-	var str = ['<b>Title</b><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', 
-			   'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod']; 			   
-	var ind = getRandom(2);			   
-	switch (e.data('type')) {
-		case 'success' : toast.success(str[ind]); break;
-		case 'warning' : toast.warning(str[ind]); break;
-		case 'error'   : toast.error(str[ind]);  break;
-		case 'info'    : toast.info(str[ind]);    break;
-		default: toast.append(str[ind]);
-
-	};		   	
-}
-function type_event_dt(e) {
+function example(e) {
 	var str = ['<b>Title</b><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', 
 			   'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod']; 			   
 	var ind = getRandom(2);	
@@ -92,6 +115,29 @@ function type_event_dt(e) {
 		case 'info' : toast.info(str[ind], options); break;
 		default: toast.append(str[ind], options);
 	}		   			   		
+}	
+
+function reconfigure(e) {
+	if (e.data('position')) {
+		RECONFIGURE('toast', { position: e.data('position') });
+	}	
+	if (e.data('animate')) {
+		RECONFIGURE('toast', { animate: e.data('animate') });
+	}	
+	if (e.data('loader')) {
+		var loader = (e.data('loader') == 'yes') ? true : false;
+		RECONFIGURE('toast', { loader: loader });
+	}	
+	if (e.data('timeout')) {		
+		RECONFIGURE('toast', { timeout: e.data('timeout') });
+	}	
+}
+
+function example_callback(e) {
+	var str = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod'; 			   
+	toast.error(str, {'icon': 'battery-empty'}, function(res){		
+		alert('Close notify - '+res.mess);
+	});
 }	
 
 function getRandom(max) {

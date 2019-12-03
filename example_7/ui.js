@@ -5,7 +5,7 @@ COMPONENT('toast', 'timeout:8; position:top-right; loader:true; animate:fade', f
     self.items = {};
     self.make = function() {
         self.aclass('ui-toast-container');
-        let position = config.position || 'top-right';
+        let position = config.position || 'top-right';        
         self.aclass(position);     
 
         self.event('click', 'a,button', function(e) {
@@ -20,11 +20,20 @@ COMPONENT('toast', 'timeout:8; position:top-right; loader:true; animate:fade', f
         });
     };
 
+    self.configure = function(key, value, init, prev) {
+        if (init)
+            return;
+        if (key=='position') {
+            self.rclass();
+            self.aclass('ui-toast-container '+value);
+        }        
+    }
+
     self.close = function(id) {
         var obj = self.items[id];          
         if (obj.autoClose) clearTimeout(obj.autoClose);
         if (!obj) return;
-        if (obj.callback) obj.callback();
+        if (obj.callback) obj.callback(obj);
         obj.callback = null;
         delete self.items[id];        
         if (config.animate == 'fade') {
