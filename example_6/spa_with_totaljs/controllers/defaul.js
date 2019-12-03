@@ -7,13 +7,13 @@ exports.install = function() {
 function news_search() {
 	var self = this;	
 	MODULE('News').search(self.query, (err, res)=>{
-		return self.json(res);
+		return self.json((err)? SUCCESS(false) : SUCCESS(true, res));
 	})
 }
 
 function news_top() {
 	var self = this;		
 	MODULE('News').top(self.query, (err, res)=>{
-		return self.json(res);
+		return self.json((err)? SUCCESS(false) : SUCCESS(true, res));
 	})
 }

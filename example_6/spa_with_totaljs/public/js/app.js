@@ -19,7 +19,7 @@
   //init page settings
   SET('common',  { 'pTop': 1, 'pSearch': 1});
   //container where we will place the data
-  var container = $('#body');
+/*  var container = $('#body');*/
   //init mini template
   var tCard, tEnd; 	
 
@@ -65,15 +65,40 @@
          query.to = option.to.toISOString();
      }
      AJAX('GET api/news/search', query, (res, err)=>{
-          
-     })
-  };
-  function lazyload_top(el) {
-      console.log('lazy top');
-      var query = { language: option.language, category: option.category, pageSize: option.pageSize, page: common.pTop, sortBy: option.sortBy };
-      AJAX('GET api/news/top', query, (res, err)=>{
-          
+      if (err || !res.success) {
+        $(el).html(tEnd());
+        return;  
+      }
+      $(el).html(tCard(res.value));
+      INC('common.pSearch', 1);
+      var $container = $(el);
+      // Masonry + ImagesLoaded 
+      $container.imagesLoaded(function(){
+        $container.masonry({
+           itemSelector: '.item'
+        });
+        el.after('<div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div>');
       })
+    })  
+  };
+  function lazyload_top(el) {      
+      var query = { language: option.language, country: option.country, category: option.category, pageSize: option.pageSize, page: common.pTop, sortBy: option.sortBy };
+      AJAX('GET api/news/top', query, (res, err)=>{
+        if (err || !res.success) {
+          $(el).html(tEnd());
+          return;    
+        }
+        $(el).html(tCard(res.value));
+        INC('common.pTop', 1);
+        var $container = $(el);
+        // Masonry + ImagesLoaded
+        $container.imagesLoaded(function(){
+          $container.masonry({
+            itemSelector: '.item',
+          });
+          el.after('<div class="lazyload"><div class="text-center"><img src="https://componentator.com/img/preloader.gif"></div></div>');
+        });
+      });               
   };
   //save option
   function save_option() {

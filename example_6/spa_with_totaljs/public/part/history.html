@@ -14,7 +14,7 @@
          {{ foreach item in value }}
                 <tr>
                    <td>{{ $index + 1}}</td>
-                   <td>{{ if item.thumb }}<img src="{{item.thumb}}" class='img-responsive'>{{ else }}<img src="lib/no_image.png" class='img-responsive'>{{fi}}</td>
+                   <td>{{ if item.thumb }}<img src="{{item.thumb}}" class='img-responsive'>{{ else }}<img src="/no_image.png" class='img-responsive'>{{fi}}</td>
                    <td>{{item.dt|format('dd.MM.yyyy hh:mm:ss')}}</td>
                    <td><h4><a href='{{item.url}}' target='_blank'>{{item.title}}</a></h4><p>{{item.description}}</p></td>
                 </tr> 
