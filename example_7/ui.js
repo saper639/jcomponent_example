@@ -1,3 +1,4 @@
+//Author Senotrusov Alexey, saper639 (04.10.2018)
 COMPONENT('toast', 'timeout:8; position:top-right; loader:true; animate:fade', function(self, config) {        
     self.singleton();
     self.readonly();  
@@ -24,8 +25,7 @@ COMPONENT('toast', 'timeout:8; position:top-right; loader:true; animate:fade', f
         if (init)
             return;
         if (key=='position') {
-            self.rclass();
-            self.aclass('ui-toast-container '+value);
+            self.rclass().aclass('ui-toast-container '+value);
         }        
     }
 
@@ -70,8 +70,9 @@ COMPONENT('toast', 'timeout:8; position:top-right; loader:true; animate:fade', f
         o.icon = o.icon || ic || null;
         let id = o.id||Math.floor(Math.random() * 100000);
         let type = (o.type) ? o.type : '';
-        let icon = (o.icon) ? 'fa-' + o.icon : null;
+        let icon = (o.icon) ? 'fa-' + o.icon : null;        
         let img = (o.img) ? "<img class='img-rounded img-responsive' src='" + o.img + "'>" : null;
+        if (img) icon = null;        
         let date = (o.date) ? o.date.format(config.format) : (config.dateAlways) ? new Date().format(config.format): null;       
         
         var obj = { id:id, type:type, icon:icon, img:img, mess:mess, date:date, callback: callback }; 
