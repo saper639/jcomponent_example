@@ -14,7 +14,7 @@
        var res = arr.findItem('id', value);	
        return (res) ? res.name : '';
   };
-  //init option from CASHE or use default
+  //init option from CACHE or use default
   SET('option', CACHE('option')||options_default);
   //init page settings
   SET('common',  { 'pTop': 1, 'pSearch': 1});
