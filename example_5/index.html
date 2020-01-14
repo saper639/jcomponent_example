@@ -2,54 +2,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Пример 5</title>
+	<title>Пример 5.1</title>
 	<link href="https://cdn.componentator.com/spa.min@18.css" rel="stylesheet" type="text/css" />
 	<script src="https://cdn.componentator.com/spa.min@18.js"></script>
 </head>
-
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-8 col-md-offset-4">
-				<div class="padding">
-					<h3>Использование шаблонизатора</h3>
-					<div data-bind="data1__template:{#example}"></div>
-					<hr>
-					<div data-bind="data2__template:{#example}"></div>
-					<hr>
-
-					<div data-bind="data3__template">
-						<script type="text/html">
-							{{ foreach item in value }}
-								{{ if item.id < 10 }}
-									<p>Запись №{{item.id}}, {{item.descr}}, {{item.dt|format('dd.MM.yyyy hh:mm:ss')}}, индекс {{ $index }}</p>
-								{{ fi }}
-							{{ end }}
-						</script>
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<script type="text/html" id="example">
-		<p>Использование <span class="{{ value.color }}">шаблонов</span>. Это очень {{ value.how }}</p>
-	</script>
-
-	<script>
-		var data1 = {color: 'red', how: 'просто!'};
-		var data2 = {color: 'red', how: 'просто!'};
-		var data3 = [
-			{ id: 5, descr: 'Запись 5', dt: NOW },
-			{ id: 8, descr: 'Запись 8', dt: NOW },
-			{ id: 12, descr: 'Запись 12', dt: NOW },
-			{ id: 2, descr: 'Запись 2', dt: NOW }
-		];
-
-		setTimeout(function() {
-			SET('data1', { color: 'green', how: 'супер просто!' });
-		}, 3000);
-	</script>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-4">
+        <div class="padding">
+          <h3>Использование шаблонизатора</h3>        
+          <div id="out1"></div>
+          <hr>
+          <div id="out2"></div>
+          <hr>
+          <div id="out3"></div>
+          <hr>
+          <h3>Хелперы в действии</h3>
+          <div id="out4"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <template id='tExample1'>
+     <p>Использование <span class='{{color}}'>шаблонов</span>. Это очень {{how}}</p>	  
+  </template>
+  <script type="text/html" id='tExample2'>
+     <h4>Автоэкранирование</h4>
+     <p>Вкл. Автоэкранирование - {{tag}}</p>
+     <p>Выкл. Автоэкранирование - {{tag|raw}}</p>
+     <h4>Форматирование даты</h4>
+     <p>{{dt}}</p>   
+     <p>{{dt|format('dd.MM.yyyy hh:ss')}}</p>   
+     <h4>Форматирование чисел</h4>
+     <p>{{cost}}</p>   
+     <p>{{cost|format(2)}}</p>     
+     <h4>Отображение числа во множественном виде </h4>
+     <p>{{num-4|pluralize('# зайцев', '# заец', '# зайца', '# зайцев')}}</p>      
+     <p>{{num-3|pluralize('# зайцев', '# заец', '# зайца', '# зайцев')}}</p>      
+     <p>{{num-1|pluralize('# зайцев', '# заец', '# зайца', '# зайцев')}}</p>      
+     <p>{{num|pluralize('# зайцев', '# заец', '# зайца', '# зайцев')}}</p>      
+     <p>{{num+1|pluralize('# зайцев', '# заец', '# зайца', '# зайцев')}}</p>      
+     <h4>Пользовательские хелперы</h4>
+     <p>{{ txt | lowercase }}</p>
+     <p>{{ txt | reverse }}</p>
+     <p>{{ txt | reverse | uppercase }}</p>
+     <p>{{ txt | reverse | uppercase | add(' - Tangular is the best') }}</p>
+  </script>
+  <script type="text/html" id='tExample3'>
+   {{ foreach m in arr}}
+      {{ if m.id < 10 }}
+         <p>Запись №{{m.id}}, {{m.descr}}, {{m.dt|format('dd.MM.yyyy hh:mm:ss')}}, индекс {{ $index }}</p>
+      {{ fi }}
+  {{ end }}
+  </script>
+  <script>
+      //регистрируем хелперы
+      Tangular.register('lowercase', function(value) {
+          return (value || '').toString().toLowerCase();
+      });
+      Thelpers.reverse = function(value) {
+          var arr = (value || '').toString().split('');
+          arr.reverse();
+          return arr.join('');
+      };
+      Thelpers.uppercase = function(value) {
+          return (value || '').toString().toUpperCase();
+      };
+      Thelpers.add = function(value, plus) {
+          return (value || '').toString() + plus;
+      };
+      var data1 = {color: 'red', how: 'просто!'};
+      var data2 = {tag: '<b>Жирный текст</b>', dt: NOW, cost: 5.056, txt: 'Обычный текст', num: 4};
+      var data3 = [
+        {id: 5,  descr: 'Запись 5',   dt: new Date()},
+        {id: 8,  descr: 'Запись 8',   dt: new Date()},
+        {id: 12, descr: 'Запись 12',  dt: new Date() },
+        {id: 2,  descr: 'Запись 2',   dt: new Date()},
+      ];
+      var ta1 = Tangular.compile($('#tExample1').html());
+      var ta2 = Tangular.compile($('#tExample2').html());
+      var ta3 = Tangular.compile($('#tExample3').html());
+      $('#out1').html(ta1(data1));
+      //выведем данные без компиляции
+      $('#out2').append(Tangular.render($('#tExample1').html(), data1));
+      $('#out3').append(ta3({'arr': data3}));
+      //хелперы в действии
+      $('#out4').append(ta2(data2));
+      setTimeout(()=>{
+        data1 = {color: 'green', how: 'супер просто!'};      
+        $('#out1').html(ta1(data1));
+      }, 3000)
+  </script>
 </body>
 </html>

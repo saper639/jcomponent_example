@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Пример 5.2</title>
+	<link href="https://cdn.componentator.com/spa.min@18.css" rel="stylesheet" type="text/css" />
+	<script src="https://cdn.componentator.com/spa.min@18.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-4">
+				<div class="padding">
+					<h3>Использование шаблонизатора</h3>
+					<div data-bind="data1__template:{#example}"></div>
+					<hr>
+					<div data-bind="data2__template:{#example}"></div>
+					<hr>
+
+					<div data-bind="data3__template">
+						<script type="text/html">
+							{{ foreach item in value }}
+								{{ if item.id < 10 }}
+									<p>Запись №{{item.id}}, {{item.descr}}, {{item.dt|format('dd.MM.yyyy hh:mm:ss')}}, индекс {{ $index }}</p>
+								{{ fi }}
+							{{ end }}
+						</script>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/html" id="example">
+		<p>Использование <span class="{{ value.color }}">шаблонов</span>. Это очень {{ value.how }}</p>
+	</script>
+
+	<script>
+		var data1 = {color: 'red', how: 'просто!'};
+		var data2 = {color: 'red', how: 'просто!'};
+		var data3 = [
+			{ id: 5, descr: 'Запись 5', dt: NOW },
+			{ id: 8, descr: 'Запись 8', dt: NOW },
+			{ id: 12, descr: 'Запись 12', dt: NOW },
+			{ id: 2, descr: 'Запись 2', dt: NOW }
+		];
+
+		setTimeout(function() {
+			SET('data1', { color: 'green', how: 'супер просто!' });
+		}, 3000);
+	</script>
+</body>
+</html>

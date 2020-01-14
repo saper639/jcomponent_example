@@ -68,6 +68,7 @@
   //save option
   function save_option() {
      if (!VALIDATE('option.*')) return; 
+     console.log(option); 
      CACHE('option', option, '3 months'); 
      SETTER('notify', 'append', 'Settings successfully saved.');
   }
