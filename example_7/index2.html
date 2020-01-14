@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Пример 7 - компонента Toast</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<script src="https://cdn.componentator.com/spa.min@18.js"></script>
+	<link rel="stylesheet" href="ui.css" />
+	<script src="ui.js"></script>
+</head>	
+<body>
+	<div data---="toast__null__timeout:6;format:dd\.MM\.yyyy hh\:mm;animate:fade;"></div>
+
+<script>
+var toast;
+FIND('toast', (comp) => toast = comp);    	               
+setTimeout(()=>{
+ toast.success('<b>Title</b><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod');
+}, 500)
+setTimeout(()=>{
+ toast.warning('<b>{0}</b><br>{1}'.format('Title', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod'));
+}, 600)
+setTimeout(()=>{
+ toast.error('<b>{0}</b><br>{1}<br><a href="#" class="btn btn-xs btn-default">Link</a>'.format('Title', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod'));
+}, 700)
+setTimeout(()=>{
+ toast.append('<b>Title</b><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', {'img': 'https://dummyimage.com/80x80/000/fff.jpg'});
+}, 2000)
+setTimeout(()=>{
+ toast.warning('<b>Title</b><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', {'icon': 'battery', 'date': NOW.add('5 day')});
+}, 2300)
+setTimeout(()=>{
+ toast.warning('<b>Title</b><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', {'icon': 'battery', 'date': NOW.add('5 day'), 'timeout': 10});
+}, 2300)
+setTimeout(()=>{
+  toast.error('fsdfsdfs fsdfsdf<br>cool', {'icon': 'battery-empty'}, function(res){		
+	alert('Close notify - '+res.mess);
+  });
+}, 2000);
+</script>	
+</body>
+</html>
