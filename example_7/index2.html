@@ -30,10 +30,11 @@ setTimeout(()=>{
  toast.warning('<b>Title</b><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', {'icon': 'battery', 'date': NOW.add('5 day')});
 }, 2300)
 setTimeout(()=>{
+ toast.reconfigure({ position: 'bottom-left' });
  toast.warning('<b>Title</b><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', {'icon': 'battery', 'date': NOW.add('5 day'), 'timeout': 10});
 }, 2300)
 setTimeout(()=>{
-  toast.error('fsdfsdfs fsdfsdf<br>cool', {'icon': 'battery-empty'}, function(res){		
+  toast.error('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', {'icon': 'battery-empty'}, function(res){		
 	alert('Close notify - '+res.mess);
   });
 }, 2000);
