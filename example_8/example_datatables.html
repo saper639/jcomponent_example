@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Пример 8.1 - компонент для использования с плагином DataTables</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<script src="https://cdn.componentator.com/spa.min@18.js"></script>
+	<link rel="stylesheet" href="ui.css" />
+	<!-- dt css -->
+	<link rel="stylesheet" href="dt/css/dataTables.bootstrap.css" />	
+	<link rel="stylesheet" href="dt/css/responsive.bootstrap.css" />	                                    
+	<link rel="stylesheet" href="dt/css/keyTable.bootstrap.css" />	                                    
+	<link rel="stylesheet" href="dt/css/scroller.bootstrap.css" />	                                    
+	<link rel="stylesheet" href="dt/css/buttons.bootstrap.css" />	                                                                	
+	<style>
+		.red { color: #d00909; }	
+		.green { color: #3c763d; }	
+	</style>	
+</head>	
+<body>
+	<div class='container'>
+		<div class='row'>
+			<div class='col-md-12'>
+				<div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
+					<h3>Примеры использования компонтента j-dt</h3>
+					<hr>
+					<h4>Згружаем полный список сразу</h4>
+					<div data---="checkbox__active">is Active?</div>
+					<!-- data---='dt__data1__name:tblUser1;' data-jc-id='uitUser1' -->
+				    <div data---='dt__data1__name:tblUser1'  >
+						<script type="text/plain">
+							{
+								style : 'table table-striped table-hover table-bordered table-condensed', 
+								fields : [ {"col": {"data": "index"}, "size": "5%", "title": "#"},
+										   {"col": {"data": "avatar", "tpl": "#taAvatar"}, "size": "10%", "title": "Avatar"},							
+										   {"col": {"data": "isActive", "tpl": "#taState"}, "size": "5%", "title": "State"},   
+										   {"col": {"data": "fullname", "render" : "return data"}, "size": "20%", "title": "FullName"},
+										   {"col": {"data": "dob", "render" : "return new Date(data).format('dd.MM.yyyy')"}, "size": "10%", "title": "Birthday"},
+										   {"col": {"data": "email", "render" : "return data"}, "size": "10%", "title": "Email"},
+										   {"col": {"data": "company", "render" : "return data"}, "size": "20%", "title": "Company"},
+										   {"col": {"data": "id", "tpl" : "#taUserAction"}, "size": "10%", "title": "Действия"},
+										],								
+								option : { keys: true, columnDefs: [{type: 'de_date', targets: 4}, {"className": "text-center", "targets": [0,1,2]}] }	
+							}							
+						</script>	
+					</div>
+					<hr>					
+					<h4>Загружаем с сервера постранично</h4>									    
+					<div  data---='dt__data1__name:tblUser2' >
+						<script type="text/plain">
+							{
+								style : 'table table-striped table-hover table-bordered table-condensed', 
+								fields : [ {"col": {"data": "index"}, "size": "5%", "title": "#"},
+										   {"col": {"data": "avatar", "tpl": "#taAvatar"}, "size": "10%", "title": "Avatar"},							
+										   {"col": {"data": "isActive", "tpl": "#taState"}, "size": "5%", "title": "State"},   
+										   {"col": {"data": "fullname", "render" : "return data"}, "size": "25%", "title": "FullName"},
+										   {"col": {"data": "dob", "render" : "return new Date(data).format('dd.MM.yyyy')"}, "size": "10%", "title": "Birthday"},
+										   {"col": {"data": "email", "render" : "return data"}, "size": "10%", "title": "Email"},
+										   {"col": {"data": "company", "render" : "return data"}, "size": "10%", "title": "Company"},
+										   {"col": {"data": "tags", "tpl": "#taTags"}, "size": "25%", "title": "Tags"},
+										   {"col": {"data": "id", "tpl" : "#taUserAction"}, "size": "10%", "title": "Действия"},
+										],
+					  						        ajax : {
+					              						url: "http://demo.votak.org/user/table",		    	       	    					
+						      						},		  		
+								option : { 'processing': true, 'serverSide': true, 'responsive': true, keys: true, columnDefs: [{type: 'de_date', targets: 4},  {"className": "text-center", "targets": [0,1,2]}]}            
+							}							
+						</script>	
+					</div>
+				</div>	
+			</div>	
+		</div>	
+	</div>		
+	<template id="taState">
+  		{{if isActive }} <i class="fa fa-circle green" aria-hidden="true"></i>
+  		  	{{else}} <i class="fa fa-circle red" aria-hidden="true"></i>
+  		{{fi}}  
+	</template>
+	<template id="taAvatar">
+  		<img src="{{avatar}}" class="img-circle" style="width:40px;">
+	</template>
+	<template id="taTags">
+  		{{ foreach t in tags }}    		
+    		<span class="label label-primary">{{t}}</span>
+		{{ end }}
+	</template>
+	<template id="taUserAction">
+		<div class='btn-group btn-group-sm'>
+		   	<button type="button" class="btn btn-default" data-jc="click__view_item"><i class="fa fa-pencil-square-o"></i></button>   
+			<button type="button" class='btn btn-default' data-jc="click__remove_item"><i class="fa fa-trash"></i></button>      								
+		</div> 
+	</template>	
+	<!-- dt js -->	
+	<script src="dt/js/dataTables.min.js"></script>
+	<script src="dt/js/dataTables.bootstrap.js"></script>
+	<script src="dt/js/dataTables.responsive.js"></script>
+	<script src="dt/js/dataTables.buttons.js"></script>
+	<script src="dt/js/dataTables.responsive.js"></script>
+	<script src="dt/js/buttons.bootstrap.js"></script>
+	<script src="dt/js/responsive.bootstrap.js"></script>
+	<script src="dt/js/buttons.print.js"></script>
+	<script src="dt/js/buttons.html5.min.js"></script>
+	<script src="dt/js/buttons.colVis.js"></script>
+	<script src="dt/js/dataTables.keyTable.js"></script>
+	<script src="dt/js/dataTables.scroller.js"></script>
+	<script src="dt/js/dataTables.rowReorder.js"></script>
+	<script src="dt/js/date_sorting.js"></script>                                                                       
+	<script src="ui.js"></script>	
+	<script>
+		$(document).ready(function() {    			  	
+    		AJAX('GET http://demo.votak.org/user/query', {}, 'data1');
+
+    		WATCH('active', function(path, value, type) {    
+    			AJAX('GET http://demo.votak.org/user/query', {active: value}, 'data1');
+			});
+		});
+
+		function view_item(e) {			
+			var curRow = $(e.element).parents('tr');
+			if (curRow.hasClass('child')) {
+     			curRow = curRow.prev();
+    		} 
+    		var comp = FIND('#'+e.owner.ID);   	    		
+    		var data = comp.dt.row(curRow).data();            	
+    		alert(JSON.stringify(data));
+    		COMPILE();
+		};
+
+		function remove_item(e) {
+			var curRow = $(e.element).parents('tr');
+			if (curRow.hasClass('child')) {
+     			curRow = curRow.prev();
+    		}	
+    		var comp = FIND('#'+e.owner.ID); 
+    		var data = comp.dt.row(curRow).data();            	
+    		comp.delete(data, 'index');  	    		
+		}
+	</script>	
+</body>
+</html>

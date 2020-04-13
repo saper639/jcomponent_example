@@ -1,0 +1,19 @@
+{
+	"sEmptyTable": "Записей не найдено",
+	"sProcessing": "<img id='ajaxloader' src='/img/ajax-loader.gif'>",
+	"sLengthMenu": "_MENU_",
+	"sZeroRecords": "Ничего не найдено",
+	"sInfo": "<small>_START_.._END_ из _TOTAL_</small>",
+	"sInfoEmpty": "",
+	"sInfoFiltered": "(из _MAX_)",
+	"sInfoPostFix": "",
+	"sSearch": "",
+	"sUrl": "",
+	"oPaginate": {
+		"sFirst":    "<",
+		"sPrevious": "<i class='fa fa-chevron-left'></i>",
+		"sNext":     "<i class='fa fa-chevron-right'></i>",
+		"sLast":     ">;"
+	}
+
+}

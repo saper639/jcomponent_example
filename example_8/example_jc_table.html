@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Пример 8.3 - использование компонента jc-table</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<script src="https://cdn.componentator.com/spa.min@18.js"></script>
+	<link rel="stylesheet" href="ui.css" />
+	<style>
+		.label { float: left; margin: 2px;}		
+		.red { color: #d00909; }	
+		.green { color: #3c763d; }		
+	</style>
+</head>	
+<body>
+	<div class='container'>
+		<div class='row'>
+			<div class='col-md-12'>
+				<div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
+					<h3>Примеры использования компонтента jc-table</h3>
+					<div data---="table__data1__detail:true;border:1;">
+						<script type="text/html" data-size="50px,70px,60px,0,0,250px,0,0" data-head="#,Avatar,State,FullName,Birthdate,Email,Company,Tags" data-align="1,1,1,0,1,0,0,0" data-sort="index,,,fullname,dob,email,company" data-display="LG">
+							<tr>
+								<td class="text-center">{{ index }}</td>
+								<td class="text-center"><img src='{{avatar}}'></td>
+								<td class="text-center">{{if isActive }} <i class="fa fa-circle green" aria-hidden="true"></i>
+  		  								{{else}} <i class="fa fa-circle red" aria-hidden="true"></i>
+  									{{fi}}  
+  								</td>
+								<td>{{ fullname }} </td>
+								<td class="text-center">{{ dob | format('dd.MM.yyyy') }}</td>
+								<td>{{ email }}</td>
+								<td>{{ company }}</td>
+								<td>{{ foreach t in tags }}<span class="label label-primary">{{t}}</span>{{ end }}</td>
+							</tr>
+						</script>
+						<script type="text/html" data-type="detail">
+							<div><b>Full Name:</b> {{ fullname }}</div>
+							<div><b>Address:</b> {{ address }}</div>							
+							<div><b>About:</b> {{ about }}</div>							
+						</script>
+
+						<script type="text/html" data-type="empty">
+							No data
+						</script>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>				
+	<script src="ui.js"></script>
+	<script>
+		$(document).ready(function() {    		
+    		AJAX('GET http://demo.votak.org/user/query', {}, 'data1');    		    		
+		});					
+	</script>	
+</body>
+</html>

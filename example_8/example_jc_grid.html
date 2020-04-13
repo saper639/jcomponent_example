@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Пример 8.2 - использование компонента jc-grid</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<script src="https://cdn.componentator.com/spa.min@18.js"></script>
+	<link rel="stylesheet" href="ui.css" />
+	<style>
+		.label { float: left; margin: 2px;}		
+		.red { color: #d00909; }	
+		.green { color: #3c763d; }		
+	</style>
+</head>	
+<body>
+	<div class='container'>
+		<div class='row'>
+			<div class='col-md-12'>
+				<h3>Примеры использования компонтента jс-grid</h3>
+				<div class="panel panel-default" style='margin: 20px 0; padding:10px; height: 500px'>					
+					<div data-jc="grid__griddata__exec:filtering">
+						<script type="text/plain">
+							[
+								{ name: 'index', text: '#', size: 1, filter: 'index', align:'center' },								
+								{ name: 'avatar', text: 'Avatar', template: '<img src="{{avatar}}" class="img-circle" style="width:40px;">', size: 1, filter: false, align:'center', class:'hidden-sm hidden-xs' },
+								{ name: 'isActive', text: 'Active', template: '{{if isActive }} <i class="fa fa-circle green" aria-hidden="true"></i>{{else}} <i class="fa fa-circle red" aria-hidden="true"></i>{{fi}}', size: 1, filter: false, align:'center' },
+								{ name: 'fullname', text: 'FullName', size: 2, filter: 'fullname' },
+								{ name: 'email', text: 'Email', size: 2, filter: 'email', class:'hidden-sm hidden-xs' },
+								{ name: 'company', text: 'Company', size: 1, filter: 'company', class:'hidden-sm hidden-xs' },
+							]
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>				
+	<script src="ui.js"></script>
+	<script>
+		var griddata = { page: 1, count: 99, pages: 10, limit: 20, items: [] };
+		$(document).ready(function() {    		
+    		AJAX('GET http://demo.votak.org/user/query', {}, 'griddata.items');    		    		
+		});	
+		function filtering(type, filter, sort, page) {
+			console.log(type, filter, sort, page);
+		}						
+	</script>	
+</body>
+</html>
