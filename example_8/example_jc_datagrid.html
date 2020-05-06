@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Пример 8.2 - использование компонента jc-grid</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<script src="https://cdn.componentator.com/spa.min@18.js"></script>
+	<link rel="stylesheet" href="https://cdn.componentator.com/spa.min@18.css" />
+	<link rel="stylesheet" href="ui.css" />
+	<style>
+		.label { float: left; margin: 2px;}		
+		.red { color: #d00909; }	
+		.green { color: #3c763d; }				
+	</style>
+</head>	
+<body>
+	<div class='container'>
+		<div class='row'>
+			<div class='col-md-12'>
+				<h3>Примеры использования компонтента jс-grid</h3>
+				<div class="panel panel-default" style='margin: 20px 0; padding:10px;'>						
+					<div data---="LAZY directory"></div>
+					<div data---="datagrid__griddata__margin:22;height:auto;clusterize:false">
+						<script type="text/plain">
+							[
+								{ name: 'index', text: '#', width: 50 },
+								{ name: 'isActive', text: 'Active', template: '{{if isActive }} <i class="fa fa-circle green" aria-hidden="true"></i>{{else}} <i class="fa fa-circle red" aria-hidden="true"></i>{{fi}}', size: 1, filter: false, align:'center' },
+								{ name: 'fullname', text: 'Fullname'},				
+								{ name: 'email', text: 'Email', width: 200},
+								{ name: 'company', text: 'Company'},
+							]
+						</script>
+					</div>										
+				</div>	
+			</div>
+		</div>
+	</div>			
+	<script src="ui.js"></script>
+	<script>		
+		$(document).ready(function() {    		
+    		AJAX('GET http://demo.votak.org/user/query', {page: 0, limit: 10}, 'griddata');    		    		
+		});			
+	</script>	
+</body>
+</html>

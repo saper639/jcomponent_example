@@ -18,7 +18,7 @@
 			<div class='col-md-12'>
 				<div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
 					<h3>Примеры использования компонтента jc-table</h3>
-					<div data---="table__griddata__detail:true;border:1;filter:filtering;">
+					<div data---="table__griddata__detail:true;border:1;filter:filtering;paginate:pagination">
 						<script type="text/html" data-size="50px,70px,60px,0,0,250px,0,0" data-head="#,Avatar,State,FullName,Birthdate,Email,Company,Tags" data-align="1,1,1,0,1,0,0,0" data-sort="index,,,fullname,dob,email,company" data-display="LG">
 							<tr>
 								<td class="text-center">{{ index }}</td>
@@ -49,10 +49,17 @@
 		</div>
 	</div>				
 	<script src="ui.js"></script>
-	<script>
-		$(document).ready(function() {    		
-	  	    AJAX('GET http://demo.votak.org/user/query', {}, 'griddata');    		    		
-		});	
+	<script>		
+		function filtering(opt) {
+			console.log('filtering', opt);
+		};		
+
+		function pagination(opt) {		
+			console.log('pagination', opt);	
+			opt.limit = 10;
+			opt.page -=1;
+			AJAX('POST http://demo.votak.org/user/filter', opt, 'griddata');    		    		
+		};						
 	</script>	
 </body>
 </html>

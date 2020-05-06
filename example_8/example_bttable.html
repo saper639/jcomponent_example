@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<title>Пример 8.6 - компонент для использования с плагином Bootstrap-Table</title>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">  
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<script src="https://cdn.componentator.com/spa.min@18.js"></script>
+	<link rel="stylesheet" href="bt/bootstrap-table.min.css" />	                                                                	
+	<link rel="stylesheet" href="ui.css" />		
+	<style>
+		.red { color: #d00909; }	
+		.green { color: #3c763d; }	
+	</style>	
+
+</head>
+<body>
+<div class='container'>
+	<div class='row'>
+		<div class='col-md-12'>
+			<div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
+				<h3>Примеры использования компонтента j-btt</h3>	
+				<hr>
+				<div data---='btt__datagrid'>					
+					<script type="text/plain">
+					{	
+						classes : 'table table-bordered table-hover table-striped table-condensed',							  		
+				  		sidePagination: 'client',
+				  		exportTypes: ['csv', 'txt', 'excel'],
+				  		showFullscreen: true,
+				  		showColumns: true,
+				  		showPrint: true,				  		
+				  		exportOptions : {onCellHtmlData: 'exportData'},
+						columns: [ 
+							{ field: 'index', title: '#', sortable: true, width:100},
+							{ field: 'isActive', title: 'Active', sortable: true, width:200, tpl:'#taState', align: 'center', ptpl: '#taStatePrint'},
+							{ field: 'fullname', title: 'FullName', sortable: true },
+							{ field: 'dob', title: 'Birthday', sortable: true, render : "return new Date(val).format('dd.MM.yyyy')", sorterDate: true}
+						]
+					}	
+					</script>	
+				</div>								
+			</div>
+		</div>
+	</div>
+</div>				
+<template id="taState">
+	{{if isActive }} <i class="fa fa-circle green" aria-hidden="true" title='Активен'></i>
+	  	{{else}} <i class="fa fa-circle red" aria-hidden="true" title='Не Активен'></i>
+	{{fi}}  
+</template>
+<template id="taStatePrint">
+	{{if isActive }}Да{{else}}Нет{{fi}}  
+</template>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="bt/ext/table_export.js"></script>
+<script src="bt/bootstrap-table.min.js"></script>
+<script src="bt/bootstrap-table-export.js"></script>
+<script src="bt/bootstrap-table-print.js"></script>
+<script src="bt/bootstrap-table-ru-RU.js"></script>	
+
+<script src="ui.js"></script>	
+<script>
+    AJAX('GET http://demo.votak.org/user/query', {}, 'datagrid');   
+    //export excel, csv
+    function exportData(cell, row, col, data) {
+    	if(row == 0) return data;
+
+    	if (col==1) {
+            var title = $(data).attr("title");                
+            return title;
+        }
+        return data;
+    } 
+</script>
+</body>	
+</html>

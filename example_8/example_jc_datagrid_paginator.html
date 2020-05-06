@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Пример 8.2 - использование компонента jc-grid</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<script src="https://cdn.componentator.com/spa.min@18.js"></script>
+	<link rel="stylesheet" href="https://cdn.componentator.com/spa.min@18.css" />
+	<link rel="stylesheet" href="ui.css" />
+	<style>
+		.label { float: left; margin: 2px;}		
+		.red { color: #d00909; }	
+		.green { color: #3c763d; }				
+	</style>
+</head>	
+<body>
+	<div class='container'>
+		<div class='row'>
+			<div class='col-md-12'>
+				<h3>Примеры использования компонтента jс-grid</h3>
+				<div class="panel panel-default" style='margin: 20px 0; padding:10px; height: 550px;'>						
+					<div data---="LAZY directory"></div>
+					<div data---="datagrid__griddata__sort:true;limit:20;exec:filtering;init:init;margin:22;height:parent;button:action;">
+						<script type="text/plain">
+							[
+								{ name: 'index', text: '#', width: 50 },
+								{ name: 'isActive', text: 'Active', template: '{{if isActive }} <i class="fa fa-circle green" aria-hidden="true"></i>{{else}} <i class="fa fa-circle red" aria-hidden="true"></i>{{fi}}', size: 1, filter: false, align:'center' },
+								{ name: 'fullname', text: 'Fullname'},				
+								{ name: 'email', text: 'Email', width: 200},
+								{ name: 'company', text: 'Company'},
+								{ text: 'Action', template: '<button type="button" name="cool" class="btn btn-link"><i class="fa fa-pencil-square-o"></i></button><button type="button" name="test" class="btn btn-link"><i class="fa fa-trash"></i></button>', filter: false, align:'center' },
+							]
+						</script>
+					</div>										
+				</div>	
+			</div>
+		</div>
+	</div>			
+	<script src="ui.js"></script>
+	<script>
+		var griddata = { page: 1, count: 0, pages: 0, limit: 30, items: [] };
+		$(document).ready(function() {    		
+	    	     AJAX('POST http://demo.votak.org/user/filter', {page: 0, limit: 30}, 'griddata');    		    		
+		});	
+		function filtering(type, filter, sort, page) {
+			console.log(type, filter, sort, page);
+			var opt = {};
+			opt.limit = 30;
+			opt.page = page-1;
+			if (filter) opt.filter = filter;
+			if (sort) opt.sort = sort[0];			
+			AJAX('POST http://demo.votak.org/user/filter', opt, 'griddata');    		    		
+		}
+                function action(btn_name, name, row, btn_element, event) {
+   	            console.log(btn_name);	
+		    console.log(name);	
+		    console.log(row);	
+		    console.log(btn_element);	
+		   //console.log(btn_name, name, row, btn_element, event);	
+                } 
+	</script>	
+</body>
+</html>

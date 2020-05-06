@@ -17,32 +17,46 @@
 		<div class='row'>
 			<div class='col-md-12'>
 				<h3>Примеры использования компонтента jс-grid</h3>
-				<div class="panel panel-default" style='margin: 20px 0; padding:10px; height: 600px; overflow-x:auto;'>									
-					<div data-jc="grid__griddata__exec:filtering;">
+				<div class="panel panel-default" style='margin: 20px 0; padding:10px; height: 600px;'>					
+					<div data-jc="grid__griddata__exec:filtering;pagination:true;init:init">
 						<script type="text/plain">
 							[
 								{ name: 'index', text: '#', size: 1, filter: 'index', align:'center' },								
-								{ name: 'avatar', text: 'Avatar', template: '<img src="{{avatar}}" class="img-circle" style="width:40px;">', size: 1, filter: false, align:'center', class:'hidden-sm hidden-xs' },			
+								{ name: 'avatar', text: 'Avatar', template: '<img src="{{avatar}}" class="img-circle" style="width:40px;">', size: 1, filter: false, align:'center', class:'hidden-sm hidden-xs' },
 								{ name: 'isActive', text: 'Active', template: '{{if isActive }} <i class="fa fa-circle green" aria-hidden="true"></i>{{else}} <i class="fa fa-circle red" aria-hidden="true"></i>{{fi}}', size: 1, filter: false, align:'center' },
 								{ name: 'fullname', text: 'FullName', size: 2, filter: 'fullname' },
 								{ name: 'email', text: 'Email', size: 2, filter: 'email', class:'hidden-sm hidden-xs' },
 								{ name: 'company', text: 'Company', size: 1, filter: 'company', class:'hidden-sm hidden-xs' },
 							]
 						</script>
-					</div>                              
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>				
 	<script src="ui.js"></script>	
 	<script>
-		var griddata = { page: 1, count: 99, pages: 10, limit: 20, items: [] };
-		$(document).ready(function() {    		
-    		AJAX('GET http://demo.votak.org/user/query', {}, 'griddata.items');    		    		
-		});	
+		var griddata = { page: 1, count: 0, pages: 0, limit: 10, items: [] };
+		function f(filter, sort, page) {			
+			var obj = {page: page-1||0, limit: griddata.limit, filter: filter, sort: sort};			
+			return obj;
+		}
+		function init(cool) {
+			AJAX('POST http://demo.votak.org/user/filter', f(), 'griddata');    		    		
+		}		
 		function filtering(type, filter, sort, page) {
-			console.log(type, filter, sort, page);
-		}	
+			console.log(type, filter, sort, page);			
+			AJAX('POST http://demo.votak.org/user/filter', f(filter, sort, page), 'griddata');    		    		
+			/*if (type=='pagination') {
+				AJAX('POST http://localhost:1235/user/filter', f(filter, sort, page), 'griddata');    		    		
+			}
+			if (type=='filter') {
+				AJAX('POST http://localhost:1235/user/filter', f(filter, sort, page), 'griddata');    		    		
+			}	
+			if (type=='sort') {
+				AJAX('POST http://localhost:1235/user/filter', f(filter, sort, page), 'griddata');    		    		
+			}	*/
+		}						
 	</script>	
 </body>
 </html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Пример 8.1 - компонент для использования с плагином DataTables</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="AdminLTE.min.css" />
+	<script src="https://cdn.componentator.com/spa.min@18.js"></script>
+        <!-- air -->
+	<script src="air/datepicker.min.js"></script>
+	<script src="air/i18n/datepicker.fr.js"></script>
+	<link rel="stylesheet" href="air/datepicker.min.css" />
+</head>	
+<body>
+<div class='container'>
+	<div class='row'>
+	<div class='col-md-12'>
+		<h3>Примеры использования компонтента jс-grid</h3>
+		<div class="panel panel-default" style='margin: 20px 0; padding:10px; height: 600px;'>	
+			<div class='form-group'>
+				<label>Выберите период:</label>
+				<div class='input-group'>
+					<div class="input-group-addon">
+	                    <i class="fa fa-clock-o"></i>
+	                </div>    
+	                <div data---="airdp__period__class:form-control;width:300px;range:true;timepicker:true;"></div> 	                
+	            </div> 	                      
+			</div>				
+		</div>
+	</div>	
+</div>
+<script>
+	var period = [NOW.add('-10 day'), NOW];	
+</script>
+<script src="ui.js"></script>	
+</body>
+</html>
