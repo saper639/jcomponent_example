@@ -240,8 +240,8 @@ COMPONENT('btt', 'locale:ru-RU;export:true;pagination:true', function(self, conf
         }; 
         meta.locale = config.locale;
         meta.pagination = config.pagination;
-        meta.searchAlign = 'left';
-       	meta.buttonsAlign = 'left';        				
+        //meta.searchAlign = 'left';
+       	//meta.buttonsAlign = 'left';        				
         meta.sidePagination = (meta.url || meta.ajax) ? 'server' : 'client';
         meta.iconsPrefix = 'fa';
         meta.icons = icons;                
