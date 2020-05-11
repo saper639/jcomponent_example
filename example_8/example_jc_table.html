@@ -18,11 +18,23 @@
 			<div class='col-md-12'>
 				<div class="panel panel-default" style='margin: 20px 0; padding:10px;'>
 					<h3>Примеры использования компонтента jc-table</h3>
-					<div data---="table__griddata__detail:true;border:1;filter:filtering;">
-						<script type="text/html" data-size="50px,70px,60px,0,0,250px,0,0" data-head="#,Avatar,State,FullName,Birthdate,Email,Company,Tags" data-align="1,1,1,0,1,0,0,0" data-sort="index,,,fullname,dob,email,company" data-display="LG">
+					<div data---="table__griddata__detail:true;border:1;filter:filtering;highlight:true;click:action">
+						<script type="text/html" data-size="50px,70px,60px,0,50px" data-head="#,Avatar,State,FullName,Action" data-align="1,1,1,0,1" data-sort="index,,,fullname" data-display="XS">
 							<tr>
 								<td class="text-center">{{ index }}</td>
-								<td class="text-center"><img src='{{avatar}}'></td>
+								<td class="text-center"><img src='{{avatar}}' class='img-circle'></td>
+								<td class="text-center">{{if isActive }} <i class="fa fa-circle green" aria-hidden="true"></i>
+  		  								{{else}} <i class="fa fa-circle red" aria-hidden="true"></i>
+  									{{fi}}  
+  								</td>
+								<td>{{ fullname }}</td>
+								<td><button type="button" name="view" class="btn btn-xs btn-default"><i class="fa fa-pencil-square-o"></i></button></td>
+							</tr>
+						</script>
+						<script type="text/html" data-size="50px,70px,60px,0,0,250px,0,50px,0" data-head="#,Avatar,State,FullName,Birthdate,Email,Company,Action,Tags" data-align="1,1,1,0,1,0,0,0,0" data-sort="index,,,fullname,dob,email,company" data-display="LG">
+							<tr>
+								<td class="text-center">{{ index }}</td>
+								<td class="text-center"><img src='{{avatar}}' class='img-circle'></td>
 								<td class="text-center">{{if isActive }} <i class="fa fa-circle green" aria-hidden="true"></i>
   		  								{{else}} <i class="fa fa-circle red" aria-hidden="true"></i>
   									{{fi}}  
@@ -31,10 +43,12 @@
 								<td class="text-center">{{ dob | format('dd.MM.yyyy') }}</td>
 								<td>{{ email }}</td>
 								<td>{{ company }}</td>
+								<td class="text-center"><button type="button" name="view" class="btn btn-xs btn-default"><i class="fa fa-pencil-square-o"></i></button></td>
 								<td>{{ foreach t in tags }}<span class="label label-primary">{{t}}</span>{{ end }}</td>
 							</tr>
 						</script>
 						<script type="text/html" data-type="detail">
+							<div><b>Birthdate:</b> {{ dob | format('dd.MM.yyyy') }}</div>
 							<div><b>Full Name:</b> {{ fullname }}</div>
 							<div><b>Address:</b> {{ address }}</div>							
 							<div><b>About:</b> {{ about }}</div>							
@@ -51,8 +65,13 @@
 	<script src="ui.js"></script>
 	<script>
 		$(document).ready(function() {    		
-	  	    AJAX('GET http://demo.votak.org/user/query', {}, 'griddata');    		    		
+	  	    AJAX('GET https://demo.votak.org/user/query', {}, 'griddata');    		    		
 		});	
+		function action(name, row, e) {	
+		  console.log('name', name);	
+		  console.log('row', row);	
+	  	  alert(JSON.stringify(row));
+                }
 	</script>	
 </body>
 </html>

@@ -18,15 +18,16 @@
 			<div class='col-md-12'>
 				<h3>Примеры использования компонтента jс-grid</h3>
 				<div class="panel panel-default" style='margin: 20px 0; padding:10px; height: 600px;'>					
-					<div data-jc="grid__griddata__exec:filtering;pagination:true;init:init">
+					<div data-jc="grid__griddata__exec:filtering;pagination:true;init:init;button:action">
 						<script type="text/plain">
 							[
 								{ name: 'index', text: '#', size: 1, filter: 'index', align:'center' },								
 								{ name: 'avatar', text: 'Avatar', template: '<img src="{{avatar}}" class="img-circle" style="width:40px;">', size: 1, filter: false, align:'center', class:'hidden-sm hidden-xs' },
 								{ name: 'isActive', text: 'Active', template: '{{if isActive }} <i class="fa fa-circle green" aria-hidden="true"></i>{{else}} <i class="fa fa-circle red" aria-hidden="true"></i>{{fi}}', size: 1, filter: false, align:'center' },
-								{ name: 'fullname', text: 'FullName', size: 2, filter: 'fullname' },
+								{ name: 'fullname', text: 'FullName', render: 'n => n.toUpperCase()', size: 2, filter: 'fullname' },
 								{ name: 'email', text: 'Email', size: 2, filter: 'email', class:'hidden-sm hidden-xs' },
 								{ name: 'company', text: 'Company', size: 1, filter: 'company', class:'hidden-sm hidden-xs' },
+								{ text: 'Action', template: '<button type="button" name="view"><i class="fa fa-pencil-square-o"></i></button>', filter: false, align:'center' },
 							]
 						</script>
 					</div>
@@ -42,11 +43,11 @@
 			return obj;
 		}
 		function init(cool) {
-			AJAX('POST http://demo.votak.org/user/filter', f(), 'griddata');    		    		
+			AJAX('POST https://demo.votak.org/user/filter', f(), 'griddata');    		    		
 		}		
 		function filtering(type, filter, sort, page) {
 			console.log(type, filter, sort, page);			
-			AJAX('POST http://demo.votak.org/user/filter', f(filter, sort, page), 'griddata');    		    		
+			AJAX('POST https://demo.votak.org/user/filter', f(filter, sort, page), 'griddata');    		    		
 			/*if (type=='pagination') {
 				AJAX('POST http://localhost:1235/user/filter', f(filter, sort, page), 'griddata');    		    		
 			}
@@ -57,6 +58,12 @@
 				AJAX('POST http://localhost:1235/user/filter', f(filter, sort, page), 'griddata');    		    		
 			}	*/
 		}						
+		function action(btn, row, comp) {
+			console.log('btn', $(btn).attr('name'));
+			console.log('row', row);
+			console.log('component', comp);
+			alert(JSON.stringify(row));
+		}	
 	</script>	
 </body>
 </html>

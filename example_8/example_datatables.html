@@ -108,10 +108,10 @@
 	<script src="ui.js"></script>	
 	<script>
 		$(document).ready(function() {    			  	
-    		AJAX('GET http://demo.votak.org/user/query', {}, 'data1');
+    		AJAX('GET https://demo.votak.org/user/query', {}, 'data1');
 
     		WATCH('active', function(path, value, type) {    
-    			AJAX('GET http://demo.votak.org/user/query', {active: value}, 'data1');
+    			AJAX('GET https://demo.votak.org/user/query', {active: value}, 'data1');
 			});
 		});
 

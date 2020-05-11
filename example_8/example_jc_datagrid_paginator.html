@@ -28,7 +28,7 @@
 								{ name: 'fullname', text: 'Fullname'},				
 								{ name: 'email', text: 'Email', width: 200},
 								{ name: 'company', text: 'Company'},
-								{ text: 'Action', template: '<button type="button" name="cool" class="btn btn-link"><i class="fa fa-pencil-square-o"></i></button><button type="button" name="test" class="btn btn-link"><i class="fa fa-trash"></i></button>', filter: false, align:'center' },
+								{ text: 'Action', template: '<button type="button" name="cool" class="btn btn-link"><i class="fa fa-pencil-square-o"></i></button>', filter: false, align:'center' },
 							]
 						</script>
 					</div>										
@@ -40,7 +40,7 @@
 	<script>
 		var griddata = { page: 1, count: 0, pages: 0, limit: 30, items: [] };
 		$(document).ready(function() {    		
-	    	     AJAX('POST http://demo.votak.org/user/filter', {page: 0, limit: 30}, 'griddata');    		    		
+	    	     AJAX('POST https://demo.votak.org/user/filter', {page: 0, limit: 30}, 'griddata');    		    		
 		});	
 		function filtering(type, filter, sort, page) {
 			console.log(type, filter, sort, page);
@@ -49,14 +49,14 @@
 			opt.page = page-1;
 			if (filter) opt.filter = filter;
 			if (sort) opt.sort = sort[0];			
-			AJAX('POST http://demo.votak.org/user/filter', opt, 'griddata');    		    		
+			AJAX('POST https://demo.votak.org/user/filter', opt, 'griddata');    		    		
 		}
-                function action(btn_name, name, row, btn_element, event) {
-   	            console.log(btn_name);	
-		    console.log(name);	
-		    console.log(row);	
-		    console.log(btn_element);	
-		   //console.log(btn_name, name, row, btn_element, event);	
+                function action(name, row, element, comp) {
+   	            console.log('name', name);	
+   	            console.log('row', row);	
+   	            console.log('element', element);	
+   	            console.log('component', comp);	
+  	    	    alert(JSON.stringify(row));
                 } 
 	</script>	
 </body>

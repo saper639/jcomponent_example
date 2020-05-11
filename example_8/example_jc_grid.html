@@ -18,15 +18,16 @@
 			<div class='col-md-12'>
 				<h3>Примеры использования компонтента jс-grid</h3>
 				<div class="panel panel-default" style='margin: 20px 0; padding:10px; height: 600px; overflow-x:auto;'>									
-					<div data-jc="grid__griddata__exec:filtering;">
+					<div data-jc="grid__griddata__exec:filtering;button:action">
 						<script type="text/plain">
 							[
-								{ name: 'index', text: '#', size: 1, filter: 'index', align:'center' },								
+								{ name: 'index', text: '#', size: 1, filter: 'index', align:'center', size:'50px' },								
 								{ name: 'avatar', text: 'Avatar', template: '<img src="{{avatar}}" class="img-circle" style="width:40px;">', size: 1, filter: false, align:'center', class:'hidden-sm hidden-xs' },			
 								{ name: 'isActive', text: 'Active', template: '{{if isActive }} <i class="fa fa-circle green" aria-hidden="true"></i>{{else}} <i class="fa fa-circle red" aria-hidden="true"></i>{{fi}}', size: 1, filter: false, align:'center' },
-								{ name: 'fullname', text: 'FullName', size: 2, filter: 'fullname' },
+								{ name: 'fullname', text: 'FullName', render: 'n => n.toUpperCase()', size: 2, filter: 'fullname' },
 								{ name: 'email', text: 'Email', size: 2, filter: 'email', class:'hidden-sm hidden-xs' },
 								{ name: 'company', text: 'Company', size: 1, filter: 'company', class:'hidden-sm hidden-xs' },
+								{ text: 'Action', template: '<button type="button" name="view"><i class="fa fa-pencil-square-o"></i></button>', filter: false, align:'center' },
 							]
 						</script>
 					</div>                              
@@ -38,10 +39,16 @@
 	<script>
 		var griddata = { page: 1, count: 99, pages: 10, limit: 20, items: [] };
 		$(document).ready(function() {    		
-    		AJAX('GET http://demo.votak.org/user/query', {}, 'griddata.items');    		    		
+    		AJAX('GET https://demo.votak.org/user/query', {}, 'griddata.items');    		    		
 		});	
 		function filtering(type, filter, sort, page) {
 			console.log(type, filter, sort, page);
+		}	
+		function action(btn, row, comp) {
+			console.log('btn', $(btn).attr('name'));
+			console.log('row', row);
+			console.log('component', comp);
+			alert(JSON.stringify(row));
 		}	
 	</script>	
 </body>

@@ -20,7 +20,7 @@
 				<h3>Примеры использования компонтента jс-grid</h3>
 				<div class="panel panel-default" style='margin: 20px 0; padding:10px;'>						
 					<div data---="LAZY directory"></div>
-					<div data---="datagrid__griddata__margin:22;height:auto;clusterize:false">
+					<div data---="datagrid__griddata__margin:22;height:auto;clusterize:false;button:action;">
 						<script type="text/plain">
 							[
 								{ name: 'index', text: '#', width: 50 },
@@ -28,6 +28,7 @@
 								{ name: 'fullname', text: 'Fullname'},				
 								{ name: 'email', text: 'Email', width: 200},
 								{ name: 'company', text: 'Company'},
+								{ text: 'Action', template: '<button type="button" name="cool" class="btn btn-link"><i class="fa fa-pencil-square-o"></i></button>', filter: false, width:50, align:'center' },
 							]
 						</script>
 					</div>										
@@ -38,8 +39,15 @@
 	<script src="ui.js"></script>
 	<script>		
 		$(document).ready(function() {    		
-    		AJAX('GET http://demo.votak.org/user/query', {page: 0, limit: 10}, 'griddata');    		    		
-		});			
+	    	    AJAX('GET https://demo.votak.org/user/query', {page: 0, limit: 10}, 'griddata');    		    		
+		});
+                function action(name, row, element, comp) {
+   	            console.log('name', name);	
+   	            console.log('row', row);	
+   	            console.log('element', element);	
+   	            console.log('component', comp);	
+  	    	    alert(JSON.stringify(row));
+                } 			
 	</script>	
 </body>
 </html>
