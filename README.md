@@ -8,5 +8,6 @@
 * example_5 - Пример использования шаблонизатора TAngular
 * example_6 - Пример single page application , "Агрегатор новостей", total.js+jcomponent
 * example_7 - Компонент Toast, всплывающие подсказки
-* example_8 - ???
+* example_8 - Примеры компонтент для работы с таблицами
+* example_9 - Компонент Dateicker, компонент использует популярный датапикер AirDp
 
